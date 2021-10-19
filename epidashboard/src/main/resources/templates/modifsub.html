@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>Epiboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/black-dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/demo/demo.css}" rel="stylesheet"/>
+</head>
+
+<style>
+    .dropbtn {
+        background-color: #1e1e2d;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #005c8e;
+    }
+
+    #myInput {
+        box-sizing: border-box;
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        padding: 14px 20px 12px 45px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #myInput:focus {
+        outline: 3px solid #ddd;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+</style>
+<style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #e9e9e9;
+    font-family: 'Arimo', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #010b26;
+}
+
+* {
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: #6ABCEA;
+}
+
+.movie-card {
+    background: #ffffff;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 315px;
+    margin: 2em;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.header-icon-container {
+    position: relative;
+}
+
+.header-icon {
+    width: 100%;
+    height: 367px;
+    line-height: 367px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 54px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6ABCEA;
+    opacity: .85;
+}
+
+.header-icon:hover {
+    background: rgba(0, 0, 0, 0.15);
+    font-size: 74px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6ABCEA;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity: 1;
+}
+
+.movie-card:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.movie-content {
+    padding: 18px 18px 24px 18px;
+    margin: 0;
+}
+
+.movie-content-header, .movie-info {
+    display: table;
+    width: 100%;
+}
+
+.movie-title {
+    font-size: 24px;
+    margin: 0;
+    display: table-cell;
+}
+
+.movie-info {
+    margin-top: 1em;
+}
+
+.info-section {
+    display: table-cell;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.info-section:first-of-type {
+    text-align: left;
+}
+
+.info-section:last-of-type {
+    text-align: right;
+}
+
+.info-section label {
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: .5em;
+    font-size: 9px;
+}
+
+.info-section span {
+    font-weight: 700;
+    font-size: 11px;
+}
+
+@media screen and (max-width: 500px) {
+    .movie-card {
+        width: 95%;
+        max-width: 95%;
+        margin: 1em;
+        display: block;
+    }
+}
+</style>
+<style>
+    .button {
+        display: inline-block;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: midnightblue;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 9px #999;
+    }
+
+    .button:hover {
+        background-color: #005c8e
+    }
+
+    .button:active {
+        background-color: #005c8e;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+</style>
+<style>
+    .button2 {
+        display: inline-block;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #dd0002;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 9px #999;
+    }
+
+    .button2:hover {
+        background-color: #8e0700
+    }
+
+    .button2:active {
+        background-color: #8e0f07;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+</style>
+<style>
+    .button3 {
+        display: inline-block;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: green;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 9px #999;
+    }
+
+    .button3:hover {
+        background-color: darkgreen;
+    }
+
+    .button3:active {
+        background-color: darkgreen;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+</style>
+
+<body class="">
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a th:href="@{/dashboard}">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/userr}">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li id="dcine">
+                    <a th:href="@{/cine}">
+                        <i class="tim-icons icon-video-66"></i>
+                        <p>Cinéma</p>
+                    </a>
+                </li>
+                <li id="dmap">
+                    <a th:href="@{/map}">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li id="dsteam">
+                    <a th:href="@{/notif}">
+                        <i class="tim-icons icon-world"></i>
+                        <p>Steam</p>
+                    </a>
+                </li>
+                <li id="dytb">
+                    <a th:href="@{/ytb}">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                        <p>Youtube</p>
+                    </a>
+                </li>
+                <li id="dred">
+                    <a th:href="@{/reddit}">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Reddit</p>
+                    </a>
+                </li>
+                <li id="dmem">
+                    <a th:href="@{/rand}">
+                        <i class="tim-icons icon-satisfied"></i>
+                        <p>Meme</p>
+                    </a>
+                </li>
+                <li id="dlip">
+                    <a th:href="@{/whereip}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Localise IP</p>
+                    </a>
+                </li>
+                <li id="ddeez">
+                    <a th:href="@{/music}">
+                        <i class="tim-icons icon-headphones"></i>
+                        <p>Music</p>
+                    </a>
+                </li>
+                <li id="dtwit">
+                    <a th:href="@{/tw}">
+                        <i class="tim-icons icon-chat-33"></i>
+                        <p>Twitter</p>
+                    </a>
+                </li>
+                <li id="dgith">
+                    <a th:href="@{/gith}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Github</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <h1 style="padding: 50px; margin-left: 31%">Sélectionner les services que vous voulez utiliser !</h1>
+        <div>
+            <div style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output1.3">
+                    <div class="header-icon-container">
+                        <a onclick="change()" href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d;" id="output1">Météo</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output1.1">- Météo du jour d'une ville</span>
+                            <span id="outpu">- Prévision météo sur 7 jour d'une ville X</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="weather" onclick="addingweather()" class="button" style="display: none">Ajouter</button>
+                            <button id="noweather" onclick="removingweather()" class="button2">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: openweather</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output2.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output2">Cinéma</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output2.1">- Affichage des films en fonction du pays</span>
+                            <span>- Recherche de film, synopsis</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="cine" onclick="addingcine()" class="button">Ajouter</button>
+                            <button id="nocine" onclick="removingcine()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: themoviedb</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output3.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output3">Youtube</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output3.1">- Recherche de vidéos et de chaine Youtube</span>
+                            <span>  </span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="ytb" onclick="addingytb()" class="button">Ajouter</button>
+                            <button id="noytb" onclick="removingytb()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Youtube</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+
+            <div style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output4.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output4">Map</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output4.1">- Permet de voir la map du monde et de tester des trajets</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="map" onclick="addingmap()" class="button">Ajouter</button>
+                            <button id="nomap" onclick="removingmap()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Google Maps</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output5.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output5">Reddit</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output5.1">- Recherche de Sub Reddit</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="reddit" onclick="addingreddit()" class="button">Ajouter</button>
+                            <button id="noreddit" onclick="removingreddit()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Reddit</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output6.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output6">Steam</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output6.1">- Permet de voir le nombre de joueurs en ligne sur certain jeux</span>
+                            <span>- Permet de voir les news de certain jeux</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="steam" onclick="addingsteam()" class="button">Ajouter</button>
+                            <button id="nosteam" onclick="removingsteam()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Steam</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output7.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output7">Meme</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output7.1">- Permet d'avoir des memes de chat en fonction d'un thème en aléatoire</span>
+                            <span>- Permet de rechercher des Gifs</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="meme" onclick="addingmeme()" class="button">Ajouter</button>
+                            <button id="nomeme" onclick="removingmeme()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: thecatapi & Giphy</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output8.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output8">Localize IP</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output8.1">- Géolocalisation de n'importe quel IP à travers le monde !</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="localizeip" onclick="addinglocalizeip()" class="button">Ajouter</button>
+                            <button id="nolocalizeip" onclick="removinglocalizeip()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: ipfinder</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output9.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output9">Deezer</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output9.1">- Connection a votre compte Deezer</span>
+                            <span id="out9.1">- Recherche de musique & écoute de la musique</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="music" onclick="addingmusic()" class="button">Ajouter</button>
+                            <button id="nomusic" onclick="removingmusic()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Deezer</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output10.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output10">Twitter</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output10.1">- Recherche de Twitte</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="twitter" onclick="addingtwitter()" class="button">Ajouter</button>
+                            <button id="notwitter" onclick="removingtwitter()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Twitter</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output11.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output11">Github</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output11.1">- Accés des projets</span>
+                            <span id="out11.1">- Accés des utilisateurs</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="gith" onclick="addinggithub()" class="button">Ajouter</button>
+                            <button id="nogith" onclick="removinggithub()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Github</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output12.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output12">Twitch</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Widgets:</label>
+                            <span id="output12.1">- Accés top streamers</span>
+                            <span id="out12.1">- Accés top game</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <button id="twitch" onclick="addingTwitch()" class="button">Ajouter</button>
+                            <button id="notwitch" onclick="removingTwitch()" class="button2" style="display: none">Retirer
+                            </button>
+                            <span></span>
+                            <label style="margin-top: 20px">API: Twitch</label>
+                        </div><!--screen-->
+                        <div class="info-section">
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+        </div>
+        <button id="sub" onclick="sub()" style="margin-left: 51%" class="button3">Confirmer</button>
+        <div style="margin-top: 60px">
+
+        </div>
+    </div><!--container-->
+</div>
+
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap-notify.js}"></script>
+<script th:src="@{/assets/js/black-dashboard.min.js}"></script>
+<script th:src="@{/assets/demo/demo.js}"></script>
+
+<script>
+    var w = true;
+    var c = false;
+    var y = false;
+    var m = false;
+    var r = false;
+    var s = false;
+    var mem = false;
+    var lip = false;
+    var deez = false;
+    var twit = false;
+    var gith = false;
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/userparse",
+        success: function (data) {
+            console.log(data);
+            if (data[0] === "false") {
+                document.getElementById("weather").style.display = "block";
+                document.getElementById("noweather").style.display = "none";
+                w = false;
+            } else {
+                document.getElementById("weather").style.display = "none";
+                document.getElementById("noweather").style.display = "block";
+                w = true;
+            }
+            if (data[1] === "false") {
+                document.getElementById("cine").style.display = "block";
+                document.getElementById("nocine").style.display = "none";
+                document.getElementById('dcine').style.display = "none";
+                c = false;
+            } else {
+                document.getElementById("cine").style.display = "none";
+                document.getElementById("nocine").style.display = "block";
+                document.getElementById('dcine').style.display = "block";
+                c = true;
+            }
+            if (data[2] === "false") {
+                document.getElementById("ytb").style.display = "block";
+                document.getElementById("noytb").style.display = "none";
+                document.getElementById('dytb').style.display = "none";
+                y = false;
+            } else {
+                document.getElementById("ytb").style.display = "none";
+                document.getElementById("noytb").style.display = "block";
+                document.getElementById('dytb').style.display = "block";
+                y = true;
+            }
+            if (data[3] === "false") {
+                document.getElementById("map").style.display = "block";
+                document.getElementById("nomap").style.display = "none";
+                document.getElementById('dmap').style.display = "none";
+                m = false;
+            } else {
+                document.getElementById("map").style.display = "none";
+                document.getElementById("nomap").style.display = "block";
+                document.getElementById('dmap').style.display = "block";
+                m = true;
+            }
+            if (data[4] === "false") {
+                document.getElementById("reddit").style.display = "block";
+                document.getElementById("noreddit").style.display = "none";
+                document.getElementById('dred').style.display = "none";
+                r = false;
+            } else {
+                document.getElementById("reddit").style.display = "none";
+                document.getElementById("noreddit").style.display = "block";
+                document.getElementById('dred').style.display = "block";
+                r = true;
+            }
+            if (data[5] === "false") {
+                document.getElementById("steam").style.display = "block";
+                document.getElementById("nosteam").style.display = "none";
+                document.getElementById('dsteam').style.display = "none";
+                s = false;
+            } else {
+                document.getElementById("steam").style.display = "none";
+                document.getElementById("nosteam").style.display = "block";
+                document.getElementById('dsteam').style.display = "block";
+                s = true;
+            }
+            if (data[6] === "false") {
+                document.getElementById("meme").style.display = "block";
+                document.getElementById("nomeme").style.display = "none";
+                document.getElementById('dmem').style.display = "none";
+                mem = false;
+            } else {
+                document.getElementById("meme").style.display = "none";
+                document.getElementById("nomeme").style.display = "block";
+                document.getElementById('dmem').style.display = "block";
+                mem = true;
+            }
+            if (data[7] === "false") {
+                document.getElementById("localizeip").style.display = "block";
+                document.getElementById("nolocalizeip").style.display = "none";
+                document.getElementById('dlip').style.display = "none";
+                lip = false;
+            } else {
+                document.getElementById("localizeip").style.display = "none";
+                document.getElementById("nolocalizeip").style.display = "block";
+                document.getElementById('dlip').style.display = "block";
+                lip = true;
+            }
+            if (data[8] === "false") {
+                document.getElementById("music").style.display = "block";
+                document.getElementById("nomusic").style.display = "none";
+                document.getElementById('ddeez').style.display = "none";
+                deez = false;
+            } else {
+                document.getElementById("music").style.display = "none";
+                document.getElementById("nomusic").style.display = "block";
+                document.getElementById('ddeez').style.display = "block";
+                deez = true;
+            }
+            if (data[9] === "false") {
+                document.getElementById("twitter").style.display = "block";
+                document.getElementById("notwitter").style.display = "none";
+                document.getElementById('dtwit').style.display = "none";
+                twit = false;
+            } else {
+                document.getElementById("twitter").style.display = "none";
+                document.getElementById("notwitter").style.display = "block";
+                document.getElementById('dtwit').style.display = "block";
+                twit = true;
+            }
+            if (data[10] === "false") {
+                document.getElementById("gith").style.display = "block";
+                document.getElementById("nogith").style.display = "none";
+                document.getElementById('dgith').style.display = "none";
+                twit = false;
+            } else {
+                document.getElementById("gith").style.display = "none";
+                document.getElementById("nogith").style.display = "block";
+                document.getElementById('dgith').style.display = "block";
+                twit = true;
+            }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    function addingTwitch() {
+        document.getElementById("twitch").style.display = "none";
+        document.getElementById("notwitch").style.display = "block";
+    }
+    function removingTwitch() {
+        document.getElementById("twitch").style.display = "block";
+        document.getElementById("notwitch").style.display = "none";
+    }
+    function addinggithub() {
+        document.getElementById("gith").style.display = "none";
+        document.getElementById("nogith").style.display = "block";
+        document.getElementById('dgith').style.display = "block";
+        gith = true;
+    }
+    function removinggithub() {
+        document.getElementById("gith").style.display = "block";
+        document.getElementById("nogith").style.display = "none";
+        document.getElementById('dgith').style.display = "none";
+        gith= false;
+    }
+    function addingmeme() {
+        document.getElementById("meme").style.display = "none";
+        document.getElementById("nomeme").style.display = "block";
+        document.getElementById('dmem').style.display = "block";
+        mem = true;
+    }
+    function removingmeme() {
+        document.getElementById("meme").style.display = "block";
+        document.getElementById("nomeme").style.display = "none";
+        document.getElementById('dmem').style.display = "none";
+        mem= false;
+    }
+    function addinglocalizeip() {
+        document.getElementById("localizeip").style.display = "none";
+        document.getElementById("nolocalizeip").style.display = "block";
+        document.getElementById('dlip').style.display = "block";
+        lip = true;
+    }
+    function removinglocalizeip() {
+        document.getElementById("localizeip").style.display = "block";
+        document.getElementById("nolocalizeip").style.display = "none";
+        document.getElementById('dlip').style.display = "none";
+        lip = false;
+    }
+    function addingmusic() {
+        document.getElementById("music").style.display = "none";
+        document.getElementById("nomusic").style.display = "block";
+        document.getElementById('ddeez').style.display = "block";
+        deez = true;
+    }
+    function removingmusic() {
+        document.getElementById("music").style.display = "block";
+        document.getElementById("nomusic").style.display = "none";
+        document.getElementById('ddeez').style.display = "none";
+        deez= false;
+    }
+    function addingtwitter() {
+        document.getElementById("twitter").style.display = "none";
+        document.getElementById("notwitter").style.display = "block";
+        document.getElementById('dtwit').style.display = "block";
+        twit = true;
+    }
+    function removingtwitter() {
+        document.getElementById("twitter").style.display = "block";
+        document.getElementById("notwitter").style.display = "none";
+        document.getElementById('dtwit').style.display = "none";
+        twit = false;
+    }
+    function addingweather() {
+        document.getElementById("weather").style.display = "none";
+        document.getElementById("noweather").style.display = "block";
+        w = true;
+    }
+    function removingweather() {
+        document.getElementById("weather").style.display = "block";
+        document.getElementById("noweather").style.display = "none";
+        w = false;
+    }
+    function addingcine() {
+        document.getElementById("cine").style.display = "none";
+        document.getElementById("nocine").style.display = "block";
+        document.getElementById('dcine').style.display = "block";
+        c = true;
+    }
+    function removingcine() {
+        document.getElementById("cine").style.display = "block";
+        document.getElementById("nocine").style.display = "none";
+        document.getElementById('dcine').style.display = "none";
+        c = false;
+    }
+    function addingytb() {
+        document.getElementById("ytb").style.display = "none";
+        document.getElementById("noytb").style.display = "block";
+        document.getElementById('dytb').style.display = "block";
+        y = true;
+    }
+    function removingytb() {
+        document.getElementById("ytb").style.display = "block";
+        document.getElementById("noytb").style.display = "none";
+        document.getElementById('dytb').style.display = "none";
+        y = false;
+    }
+    function addingmap() {
+        document.getElementById("map").style.display = "none";
+        document.getElementById("nomap").style.display = "block";
+        document.getElementById('dmap').style.display = "block";
+        m = true;
+    }
+    function removingmap() {
+        document.getElementById("map").style.display = "block";
+        document.getElementById("nomap").style.display = "none";
+        document.getElementById('dmap').style.display = "none";
+        m = false;
+    }
+    function addingreddit() {
+        document.getElementById("reddit").style.display = "none";
+        document.getElementById("noreddit").style.display = "block";
+        document.getElementById('dred').style.display = "block";
+        r = true;
+    }
+    function removingreddit() {
+        document.getElementById("reddit").style.display = "block";
+        document.getElementById("noreddit").style.display = "none";
+        document.getElementById('dred').style.display = "none";
+        r = false;
+    }
+    function addingsteam() {
+        document.getElementById("steam").style.display = "none";
+        document.getElementById("nosteam").style.display = "block";
+        document.getElementById('dsteam').style.display = "block";
+        s = true;
+    }
+    function removingsteam() {
+        document.getElementById("steam").style.display = "block";
+        document.getElementById("nosteam").style.display = "none";
+        document.getElementById('dsteam').style.display = "none";
+        s = false;
+    }
+
+    function sub() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/modifsubcri",
+            data: {weather: w, cine: c, ytb: y, map: m, red: r, steam: s, meme: mem, lip: lip, deezer: deez, twitter: twit, gith: gith}, // parameters
+            success: function (data) {
+                console.log(data);
+                window.location.href = "/dashboard";
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    document.getElementById("output1.3").style.background = "url('https://media2.giphy.com/media/fAV73wP5H7xN6/giphy.gif?cid=790b76118c58bb87ecead292ba0a99d1028767e1d902399f&rid=giphy.gif')";
+    document.getElementById("output2.3").style.background = "url('https://media1.giphy.com/media/3o7rc0qU6m5hneMsuc/giphy.gif?cid=790b761112d96c26ce614601a13ff635a34ddb80e737a8ea&rid=giphy.gif')";
+    document.getElementById("output3.3").style.background = "url('https://www.logospng.com/images/182/youtube-bling-psd-vector-vectorhqcom-182517.png')";
+    document.getElementById("output4.3").style.background = "url('https://www.ydesignservices.com/wp-content/uploads/2016/07/Googlemap.jpg')";
+    document.getElementById("output5.3").style.background = "url('https://techcrunch.com/wp-content/uploads/2012/11/09y97o90fkuqqas68g5y1.png?w=730&crop=1')";
+    document.getElementById("output6.3").style.background = "url('https://img.bfmtv.com/c/1256/708/160826/66d63a346fd8d58f235be6f93a.png')";
+
+
+    document.getElementById("output7.3").style.background = "url('https://media1.giphy.com/media/UWyaQUFFPf1MXYqsgf/giphy.gif?cid=790b761147a449698df66436efd8abfbb359d9aa7a0af9a5&rid=giphy.gif')";
+    document.getElementById("output8.3").style.background = "url('https://kbimages1-a.akamaihd.net/aabb158f-f9a7-4472-be4d-27a5e162f598/353/569/90/False/la-cible-zero-un-thriller-d-espionnage-de-l-agent-zero-volume-2.jpg')";
+    document.getElementById("output9.3").style.background = "url('https://mrc-assets.s3.amazonaws.com/assets/Image/103884-fitandcrop-717x437.jpg')";
+    document.getElementById("output10.3").style.background = "url('https://cyprus-mail.com/old/wp-content/uploads/2014/05/teitter.jpg')";
+    document.getElementById("output11.3").style.background = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCSHwXhbDnsMDex64-fUhk8txtaMslWEL8USaM-DBCyQvNExyB&s')";
+    document.getElementById("output12.3").style.background = "url('https://www.own3d.tv/wp-content/uploads/2018/06/twitch-game-streaming-guide.jpg')";
+
+    $(document).ready(function () {
+        $().ready(function () {
+            $sidebar = $('.sidebar');
+            $navbar = $('.navbar');
+            $main_panel = $('.main-panel');
+
+            $full_page = $('.full-page');
+
+            $sidebar_responsive = $('body > .navbar-collapse');
+            sidebar_mini_active = true;
+            white_color = false;
+
+            window_width = $(window).width();
+
+            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+            $('.fixed-plugin a').click(function (event) {
+                if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                }
+            });
+
+            $('.fixed-plugin .background-color span').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+
+                var new_color = $(this).data('color');
+
+                if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                }
+
+                if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                }
+
+                if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                }
+            });
+
+            $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                }
+
+                // we simulate the window Resize so the charts will get updated in realtime.
+                var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 180);
+
+                // we stop the simulation of Window Resize after the animations are completed
+                setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                }, 1000);
+            });
+
+            $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').addClass('white-content');
+                    }, 900);
+
+                    white_color = true;
+                }
+
+
+            });
+
+            $('.light-badge').click(function () {
+                $('body').addClass('white-content');
+            });
+
+            $('.dark-badge').click(function () {
+                $('body').removeClass('white-content');
+            });
+        });
+    });
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS &&
+    TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+    });
+</script>
+</body>
+</html>

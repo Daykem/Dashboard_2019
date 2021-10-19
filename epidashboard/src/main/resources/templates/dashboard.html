@@ -1,0 +1,3697 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>Epiboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/black-dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/demo/demo.css}" rel="stylesheet"/>
+</head>
+
+<style>
+    .card {
+        cursor: move;
+    }
+
+    .dropbtn {
+        background-color: #27293d;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #005c8e;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+</style>
+<style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #e9e9e9;
+    font-family: 'Arimo', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #010b26;
+}
+
+* {
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: #6ABCEA;
+}
+
+.movie-card {
+    background: #ffffff;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 315px;
+    margin: 2em;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.header-icon-container {
+    position: relative;
+}
+
+.header-icon {
+    width: 100%;
+    height: 367px;
+    line-height: 367px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 54px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6ABCEA;
+    opacity: .85;
+}
+
+.header-icon:hover {
+    background: rgba(0, 0, 0, 0.15);
+    font-size: 74px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6ABCEA;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity: 1;
+}
+
+.movie-card:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.movie-content {
+    padding: 18px 18px 24px 18px;
+    margin: 0;
+}
+
+.movie-content-header, .movie-info {
+    display: table;
+    width: 100%;
+}
+
+.movie-title {
+    font-size: 24px;
+    margin: 0;
+    display: table-cell;
+}
+
+.movie-info {
+    margin-top: 1em;
+}
+
+.info-section {
+    display: table-cell;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.info-section:first-of-type {
+    text-align: left;
+}
+
+.info-section:last-of-type {
+    text-align: right;
+}
+
+.info-section label {
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: .5em;
+    font-size: 9px;
+}
+
+.info-section span {
+    font-weight: 700;
+    font-size: 11px;
+}
+
+@media screen and (max-width: 500px) {
+    .movie-card {
+        width: 95%;
+        max-width: 95%;
+        margin: 1em;
+        display: block;
+    }
+}
+</style>
+
+<body>
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="active ">
+                    <a th:href="@{/dashboard}">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/userr}">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li id="dcine">
+                    <a th:href="@{/cine}">
+                        <i class="tim-icons icon-video-66"></i>
+                        <p>Cinéma</p>
+                    </a>
+                </li>
+                <li id="dmap">
+                    <a th:href="@{/map}">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li id="dsteam">
+                    <a th:href="@{/notif}">
+                        <i class="tim-icons icon-world"></i>
+                        <p>Steam</p>
+                    </a>
+                </li>
+                <li id="dytb">
+                    <a th:href="@{/ytb}">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                        <p>Youtube</p>
+                    </a>
+                </li>
+                <li id="dred">
+                    <a th:href="@{/reddit}">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Reddit</p>
+                    </a>
+                </li>
+                <li id="dmeme">
+                    <a th:href="@{/rand}">
+                        <i class="tim-icons icon-satisfied"></i>
+                        <p>Meme</p>
+                    </a>
+                </li>
+                <li id="dlip">
+                    <a th:href="@{/whereip}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Localise IP</p>
+                    </a>
+                </li>
+                <li id="ddeez">
+                    <a th:href="@{/music}">
+                        <i class="tim-icons icon-headphones"></i>
+                        <p>Music</p>
+                    </a>
+                </li>
+                <li id="dtwit">
+                    <a th:href="@{/tw}">
+                        <i class="tim-icons icon-chat-33"></i>
+                        <p>Twitter</p>
+                    </a>
+                </li>
+                <li id="dgith">
+                    <a th:href="@{/gith}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Github</p>
+                    </a>
+                </li>
+                <li id="dtwitch">
+                    <a th:href="@{/twitch}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Twitch</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle d-inline">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <div class="photo">
+                                    <img th:src="@{/assets/img/anime3.png}" alt="Profile Photo">
+                                </div>
+                                <b class="caret d-none d-lg-block d-xl-block"></b>
+                                <p class="d-lg-none">
+                                    Log out
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li class="nav-link"><a th:href="@{/userr}" class="nav-item dropdown-item">Profile</a>
+                                </li>
+                                <li class="nav-link"><a th:href="@{/modifsub}"
+                                                        class="nav-item dropdown-item">Settings</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li class="nav-link"><a th:href="@{/}" class="nav-item dropdown-item">Log out</a></li>
+                            </ul>
+                        </li>
+                        <li class="separator d-lg-none"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input onclick="changement()" type="text" class="form-control" id="inlineFormInputGroup"
+                               placeholder="Recherche une ville" value="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" id="weather">
+            <div class="col-lg-4">
+                <div id="draggable">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <h5 class="card-category">Météo</h5>
+                            <h3 style="margin-left: 30px;" class="card-title" id="output"><i
+                                    class="tim-icons icon-bell-55 text-primary"></i></h3>
+                            <li style="margin-left: -10px; margin-top: -52px;" class="search-bar input-group">
+                                <button class="btn btn-link" id="meteo-recherche" data-toggle="modal"
+                                        data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
+                                    <span class="d-lg-none d-md-block"></span>
+                                </button>
+                            </li>
+                            <div class="dropdown">
+                                <select id="refeshmodeweather" class="dropbtn" onchange="refeshmodeweather(this)"
+                                        style="margin-left: 330px">
+                                    <option onclick="refeshmodeweather()" value="30">30 secondes</option>
+                                    <option onclick="refeshmodeweather()" value="60">1 minutes</option>
+                                    <option onclick="refeshmodeweather()" value="120">2 minutes</option>
+                                    <option onclick="refeshmodeweather()" value="300">5 minutes</option>
+                                    <option onclick="refeshmodeweather()" value="600">10 minutes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <img th:src="@{/img/Clear.gif}" id="myweatherimg"
+                             style="position: absolute; margin-top: 40px; margin-left: 200px" height="100px"
+                             width=“200px”>
+                        <div class="card-body">
+                            <p style="padding-left: 10px" id="output2"></p>
+                            <p style="padding-left: 10px" id="umid"></p>
+                            <p style="padding-left: 10px" id="output3"></p>
+                            <p style="padding-left: 10px" id="outputMAX"></p>
+                            <p style="padding-left: 10px" id="outputMIN"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-lg-14">
+                    <div id="draggable2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <h4 class="card-title" style="padding: 10px">Prévision Météo</h4>
+                                    <div class="dropdown">
+                                        <select id="myInput" class="dropbtn" onchange="changem()">
+                                            <option onclick="changem()" value="Nice,fr">Nice</option>
+                                            <option onclick="changem()" value="Bordeaux,fr">Bordeaux</option>
+                                            <option onclick="changem()" value="Paris,fr">Paris</option>
+                                            <option onclick="changem()" value="Lyon,fr">Lyon</option>
+                                            <option onclick="changem()" value="Nantes,fr">Nantes</option>
+                                            <option onclick="changem()" value="Lille,fr">Lille</option>
+                                            <option onclick="changem()" value="La Motte,fr">La Motte</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="poutput">Demain</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="pmyweatherimg"
+                                                 style="position: absolute; margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="poutput2"></p>
+                                                <p style="padding-left: 10px" id="pumid"></p>
+                                                <p style="padding-left: 10px" id="poutput3"></p>
+                                                <p style="padding-left: 10px" id="poutputMAX"></p>
+                                                <p style="padding-left: 10px" id="poutputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p2output">Après demain</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p2myweatherimg"
+                                                 style="position: absolute;  margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p2output2"></p>
+                                                <p style="padding-left: 10px" id="p2umid"></p>
+                                                <p style="padding-left: 10px" id="p2output3"></p>
+                                                <p style="padding-left: 10px" id="p2outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p2outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p3output">J + 3</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p3myweatherimg"
+                                                 style="position: absolute;  margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p3output2"></p>
+                                                <p style="padding-left: 10px" id="p3umid"></p>
+                                                <p style="padding-left: 10px" id="p3output3"></p>
+                                                <p style="padding-left: 10px" id="p3outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p3outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p4output">J + 4</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p4myweatherimg"
+                                                 style="position: absolute; margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p4output2"></p>
+                                                <p style="padding-left: 10px" id="p4umid"></p>
+                                                <p style="padding-left: 10px" id="p4output3"></p>
+                                                <p style="padding-left: 10px" id="p4outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p4outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p5output">J + 5</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p5myweatherimg"
+                                                 style="position: absolute; margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p5output2"></p>
+                                                <p style="padding-left: 10px" id="p5umid"></p>
+                                                <p style="padding-left: 10px" id="p5output3"></p>
+                                                <p style="padding-left: 10px" id="p5outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p5outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p6output">J + 6</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p6myweatherimg"
+                                                 style="position: absolute;  margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p6output2"></p>
+                                                <p style="padding-left: 10px" id="p6umid"></p>
+                                                <p style="padding-left: 10px" id="p6output3"></p>
+                                                <p style="padding-left: 10px" id="p6outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p6outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card card-chart">
+                                            <div class="card-header">
+                                                <h3 class="card-title" id="p7output">J + 7</h3>
+                                            </div>
+                                            <img th:src="@{/img/Clear.gif}" id="p7myweatherimg"
+                                                 style="position: absolute;  margin-top: 50px; margin-left: 250px"
+                                                 height="100px" width=“200px”>
+                                            <div class="card-body">
+                                                <p style="padding-left: 10px" id="p7output2"></p>
+                                                <p style="padding-left: 10px" id="p7umid"></p>
+                                                <p style="padding-left: 10px" id="p7output3"></p>
+                                                <p style="padding-left: 10px" id="p7outputMAX"></p>
+                                                <p style="padding-left: 10px" id="p7outputMIN"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" id="steam">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <div class="col-lg-12">
+                                    <h2 style="padding: 10px; margin-left: -20px; font-size: 22px" id="e"
+                                        class="card-category">News de jeux</h2>
+                                    <div class="dropdown" style="margin-left: 960px; margin-top: -20px">
+                                        <select id="refeshmodesteam" class="dropbtn" onchange="refeshmodesteam(this)">
+                                            <option onclick="refeshmodesteam()" value="30">30 secondes</option>
+                                            <option onclick="refeshmodesteam()" value="60">1 minutes</option>
+                                            <option onclick="refeshmodesteam()" value="120">2 minutes</option>
+                                            <option onclick="refeshmodesteam()" value="300">5 minutes</option>
+                                            <option onclick="refeshmodesteam()" value="600">10 minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="card card-chart">
+                                        <div class="card-header">
+                                            <div class="col-lg-7">
+                                                <h2 style="padding: 10px; margin-left: -20px; font-size: 22px"
+                                                    id="number" class="card-category"></h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding: 20px" class="row">
+                                <div class="movie-card">
+                                    <div style="background-size: cover; background: #1d253b" id="steam1.3">
+                                        <div class="header-icon-container">
+                                            <a id="launch1" href="#">
+                                                <i class="material-icons header-icon"></i>
+                                            </a>
+                                        </div>
+                                    </div><!--movie-header-->
+                                    <div class="movie-content">
+                                        <div class="movie-content-header">
+                                            <a href="#">
+                                                <h3 class="movie-title" style="color: #0a0c0d" id="steam1">
+                                                    Loading...</h3>
+                                            </a>
+                                        </div>
+                                        <div class="movie-info">
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span id="steam1.1"></span>
+                                            </div><!--date,time-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--screen-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--row-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--seat-->
+                                        </div>
+                                    </div><!--movie-content-->
+                                </div>
+
+                                <div class="movie-card">
+                                    <div style="background-size: cover; background: #1d253b" id="steam2.3">
+                                        <div class="header-icon-container">
+                                            <a id="launch2" href="#">
+                                                <i class="material-icons header-icon"></i>
+                                            </a>
+                                        </div>
+                                    </div><!--movie-header-->
+                                    <div class="movie-content">
+                                        <div class="movie-content-header">
+                                            <a href="#">
+                                                <h3 class="movie-title" style="color: #0a0c0d" id="steam2">
+                                                    Loading...</h3>
+                                            </a>
+                                        </div>
+                                        <div class="movie-info">
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span id="steam2.1"></span>
+                                            </div><!--date,time-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--screen-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--row-->
+                                            <div class="info-section">
+                                                <label></label>
+                                                <span></span>
+                                            </div><!--seat-->
+                                        </div>
+                                    </div><!--movie-content-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" id="ytb">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h3 class="card-title" style="margin-left: 20px">Youtube</h3>
+                                <h3 style="margin-left: 30px;" class="card-title" id="1ytb"></h3>
+                                <div class="dropdown" style="margin-left: 960px; margin-top: -10px">
+                                    <select id="refeshmodeytb" class="dropbtn" onchange="refeshmodeytb()">
+                                        <option onclick="refeshmodeytb()" value="3600">1 heure</option>
+                                        <option onclick="refeshmodeytb()" value="7200">2 heures</option>
+                                        <option onclick="refeshmodeytb()" value="18000">5 heures</option>
+                                        <option onclick="refeshmodeytb()" value="36000">10 heures</option>
+                                        <option onclick="refeshmodeytb()" value="86400">24 heures</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div style="margin-left: 1%; margin-top: 10px">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="card card-chart">
+                                                    <div class="card-header">
+                                                        <h3 style="margin-left: 30px;" class="card-title"
+                                                            id="1ytb1.1"></h3>
+                                                        <img id="1ytb1" width="200" height="150">
+                                                    </div>
+                                                </div>
+                                            </div><!--movie-content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div style="margin-left: 1%; margin-top: 10px">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="card card-chart">
+                                                    <div class="card-header">
+                                                        <h3 style="margin-left: 30px;" class="card-title"
+                                                            id="1ytb2.1"></h3>
+                                                        <img id="1ytb2" width="200" height="150">
+                                                    </div>
+                                                </div>
+                                            </div><!--movie-content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div style="margin-left: 1%; margin-top: 10px">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="card card-chart">
+                                                    <div class="card-header">
+                                                        <h3 style="margin-left: 30px;" class="card-title"
+                                                            id="1ytb3.1"></h3>
+                                                        <img id="1ytb3" width="200" height="150">
+                                                    </div>
+                                                </div>
+                                            </div><!--movie-content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div style="margin-left: 1%; margin-top: 10px">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="card card-chart">
+                                                    <div class="card-header">
+                                                        <h3 style="margin-left: 30px;" class="card-title"
+                                                            id="1ytb4.1"></h3>
+                                                        <img id="1ytb4" width="200" height="150">
+                                                    </div>
+                                                </div>
+                                            </div><!--movie-content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div style="margin-left: 1%; margin-top: 10px">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="card card-chart">
+                                                    <div class="card-header">
+                                                        <h3 style="margin-left: 30px;" class="card-title"
+                                                            id="1ytb0.1"></h3>
+                                                        <img id="1ytb0" width="200" height="150">
+                                                    </div>
+                                                </div>
+                                            </div><!--movie-content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--movie-content-->
+                </div>
+            </div>
+
+            <div class="content" id="reddit">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h3 class="card-title" style="margin-left: 10px">Sub Reddit</h3>
+                                <div class="dropdown" style="margin-left: 960px; margin-top: -10px">
+                                    <select id="refeshmodereddit" class="dropbtn" onchange="refeshmodereddit()">
+                                        <option onclick="refeshmodereddit()" value="30">30 secondes</option>
+                                        <option onclick="refeshmodereddit()" value="60">1 minutes</option>
+                                        <option onclick="refeshmodereddit()" value="120">2 minutes</option>
+                                        <option onclick="refeshmodereddit()" value="300">5 minutes</option>
+                                        <option onclick="refeshmodereddit()" value="600">10 minutes</option>
+                                    </select>
+                                </div>
+                                <h4 style="margin-left: 30px;" class="card-title" id="1reddit"></h4>
+                                <div style="padding-bottom: 20px; margin-left: 1%; margin-top: 10px">
+                                    <img id="1reddit1" width="150" height="150">
+                                    <img id="1reddit2" width="150" height="150">
+                                    <img id="1reddit3" width="150" height="150">
+                                    <img id="1reddit4" width="150" height="150">
+                                    <img id="1reddit5" width="150" height="150">
+                                    <img id="1reddit6" width="150" height="150">
+                                    <img id="1reddit7" width="150" height="150">
+                                    <img id="1reddit8" width="150" height="150">
+                                    <img id="1reddit9" width="150" height="150">
+                                    <img id="1reddit0" width="150" height="150">
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--movie-content-->
+                </div>
+            </div>
+
+            <div class="content" id="meme">
+                <div class="row" id="meme1">
+                    <div class="col-lg-5">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <div class="col-lg-12">
+                                    <h2 style="padding: 10px; margin-left: -10px; font-size: 22px" id="ed"
+                                        class="card-title">Thème</h2>
+                                    <div class="dropdown" style="margin-left: 960px; margin-top: -10px">
+                                        <select id="refeshmodememe" class="dropbtn" onchange="refeshmodememe(this)">
+                                            <option onclick="refeshmodememe()" value="10">10 secondes</option>
+                                            <option onclick="refeshmodememe()" value="30">30 secondes</option>
+                                            <option onclick="refeshmodememe()" value="60">1 minutes</option>
+                                            <option onclick="refeshmodememe()" value="120">2 minutes</option>
+                                            <option onclick="refeshmodememe()" value="300">5 minutes</option>
+                                            <option onclick="refeshmodememe()" value="600">10 minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style=" margin-left: 10px; padding: 20px" class="row">
+                                <img id="meme0" width="250" height="250">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-chart" style="padding: 20px" id="meme2">
+                    <li class="search-bar input-group">
+                        <h2 style="margin-left: -10px; font-size: 22px" id="ea" class="card-category">Giphy</h2>
+                        <div class="dropdown" style="margin-left: 960px; margin-top: -20px">
+                            <select id="refeshmodegiphy" class="dropbtn" onchange="refeshmodegiphy()">
+                                <option onclick="refeshmodegiphy()" value="30">30 secondes</option>
+                                <option onclick="refeshmodegiphy()" value="60">1 minutes</option>
+                                <option onclick="refeshmodegiphy()" value="120">2 minutes</option>
+                                <option onclick="refeshmodegiphy()" value="300">5 minutes</option>
+                                <option onclick="refeshmodegiphy()" value="600">10 minutes</option>
+                            </select>
+                        </div>
+                    </li>
+                    <div style="margin-left: 1%; margin-top: 10px">
+                        <img id="1meme1" width="150" height="150">
+                        <img id="1meme2" width="150" height="150">
+                        <img id="1meme3" width="150" height="150">
+                        <img id="1meme4" width="150" height="150">
+                        <img id="1meme5" width="150" height="150">
+                        <img id="1meme6" width="150" height="150">
+                        <img id="1meme7" width="150" height="150">
+                        <img id="1meme8" width="150" height="150">
+                        <img id="1meme9" width="150" height="150">
+                        <img id="1meme0" width="150" height="150">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-chart" id="music" style="padding: 20px">
+                <div class="content">
+                    <li class="search-bar input-group">
+                        <h2 style="margin-left: -10px; font-size: 22px" id="dez" class="card-category">Deezer</h2>
+                    </li>
+                    <div style="margin-left: 1%; margin-top: 10px">
+                        <iframe id="playermusic1" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic2" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic3" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic4" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic5" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic6" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic7" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                        <iframe id="playermusic8" scrolling="no" frameborder="0" allowTransparency="true" width="100%"
+                                height="90"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" id="twitter">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h3 style="margin-left: 30px" class="card-title">Une recherche sur Twitter ?
+                                    identifiant, nom ou mot clefs, rien n'est introuvable !</h3>
+                                <h4 style="margin-left: 30px;" class="card-title" id="1twitter"></h4>
+                                <div class="dropdown" style="margin-left: 960px; margin-top: -10px">
+                                    <select id="refeshmodetwitter" class="dropbtn" onchange="refeshmodetwitter()">
+                                        <option onclick="refeshmodetwitter()" value="30">30 secondes</option>
+                                        <option onclick="refeshmodetwitter()" value="60">1 minutes</option>
+                                        <option onclick="refeshmodetwitter()" value="120">2 minutes</option>
+                                        <option onclick="refeshmodetwitter()" value="300">5 minutes</option>
+                                        <option onclick="refeshmodetwitter()" value="600">10 minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter0"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter1"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter2"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter3"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter4"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter5"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter6"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter7"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter8"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h2 style="margin-left: 30px;" class="card-title"
+                                                        id="1twitter9"></h2>
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--movie-content-->
+                </div>
+            </div>
+            <div class="dropdown" style="margin-left: 82%">
+                <select id="refeshmodecine" class="dropbtn" onchange="refeshmodecine()">
+                    <option onclick="refeshmodecine()" value="30">30 minutes</option>
+                    <option onclick="refeshmodecine()" value="30">1 heure</option>
+                    <option onclick="refeshmodecine()" value="60">2 heures</option>
+                    <option onclick="refeshmodecine()" value="120">5 heures</option>
+                    <option onclick="refeshmodecine()" value="300">10 heures</option>
+                </select>
+            </div>
+            <div style="cursor: move;" id="cinema">
+                <div id="car1" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine1.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine1">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine1.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine1.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+                <div id="car2" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine2.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine2">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine2.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine2.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car3" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine3.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine3">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine3.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine3.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+
+                <div id="car4" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine4.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine4">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine4.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine4.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car5" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine5.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine5">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine5.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine5.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car6" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine6.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine6">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine6.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine6.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car7" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine7.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine7">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine7.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine7.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car8" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine8.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine8">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine8.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine8.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car9" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine9.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine9">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine9.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine9.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car10" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine10.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine10">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine10.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine10.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car11" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine11.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine11">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine11.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine11.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car12" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine12.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine12">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine12.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine12.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+
+                <div id="car13" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine13.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine13">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine13.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine13.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car14" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine14.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine14">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine14.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine14.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car15" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine15.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine15">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine15.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine15.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car16" style="margin-top: 70px" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine16.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine16">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine16.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine16.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car17" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine17.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine17">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine17.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine17.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+
+                <div id="car18" class="movie-card">
+                    <div style="background-size: cover; background: #1d253b" id="cine18.3">
+                        <div class="header-icon-container">
+                            <a href="#">
+                                <i class="material-icons header-icon"></i>
+                            </a>
+                        </div>
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title" style="color: #0a0c0d" id="cine18">Loading...</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span id="cine18.1"></span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label></label>
+                                <span id="cine18.2"></span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label></label>
+                                <span></span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link">
+                        Epiboard
+                    </a>
+                </li>
+            </ul>
+            <div class="copyright">
+                ©
+                <a href="https://tomrouvier.eu" target="_blank">Epiboard</a>
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title">Couleur du menu</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+            <!--            <li class="adjustments-line text-center color-change">
+                            <select id="refeshmode" class="dropbtn" onchange="mytimer()" style="margin-top: -15px">
+                                <option onclick="mytimer()" value="30">30 secondes</option>
+                                <option onclick="mytimer()" value="60">1 minutes</option>
+                                <option onclick="mytimer()" value="120">2 minutes</option>
+                                <option onclick="mytimer()" value="300">5 minutes</option>
+                                <option onclick="mytimer()" value="600">10 minutes</option>
+                            </select>
+                        </li>-->
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/webjars/js-cookie/js.cookie.js}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        funIntervalsteam();
+    });
+    var objIntervalrefeshmodesteam;
+    function funIntervalsteam()
+    {
+        var i = 0;
+        var numsteam =  parseInt(document.getElementById("refeshmodesteam").value.toString());
+        var intervalsteam =  numsteam* 1000;
+        objIntervalsteam = setInterval(function () {
+            i++;
+            if (i >= numsteam)
+                clearInterval(objIntervalsteam);
+            cache_clearsteam();
+        }, intervalsteam);
+    }
+
+    function cache_clearsteam() {
+        console.log("TEST");
+        refresteam();
+    }
+
+    function refeshmodesteam(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalsteam();
+    }
+
+    function refresteam() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/gettab",
+                success: function (data) {
+                    console.log(data);
+                    var vsteam = data[0];
+                    var v2steam = data[1];
+                    var vytb = data[2];
+                    var vreddit = data[3];
+                    var vmeme = data[4];
+                    var vgiphy = data[5];
+                    var vmusic = data[6];
+                    var vtwitter = data[7];
+                    var vgithub = data[8];
+
+                    var mysteam = vsteam;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:8080/getsteam",
+                        data: {appid: mysteam},
+                        success: function (data) {
+                            document.getElementById("number").innerHTML = data.response.player_count + " gamers connectés";
+                        },
+                        error: function (status) {
+                            console.log(status);
+                        }
+                    });
+
+                    var newssteam = v2steam;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:8080/changing",
+                        data: {c: newssteam},
+                        success: function (data) {
+                            document.getElementById("steam1.1").innerHTML = data["appnews"]["newsitems"][0]["author"];
+                            document.getElementById("steam1").innerHTML = data["appnews"]["newsitems"][0]["title"];
+                            document.getElementById("launch1").href = data["appnews"]["newsitems"][0]["url"];
+                            document.getElementById("steam2.1").innerHTML = data["appnews"]["newsitems"][1]["author"];
+                            document.getElementById("steam2").innerHTML = data["appnews"]["newsitems"][1]["title"];
+                            document.getElementById("launch2").href = data["appnews"]["newsitems"][1]["url"];
+                            if (newssteam === "730") {
+                                document.getElementById("steam1.3").style.background = "url('https://s.starladder.com/assets/coreui/game/csgo-game-59e546b074a4be5c6ef3a7977c4f3cf5f1a6b5fb3f312f03c939b8d9f96650da.png')";
+                                document.getElementById("steam2.3").style.background = "url('https://se7en.ws/wp-content/uploads/2017/02/csgo_poster.png')";
+                            }
+                            if (newssteam === "570") {
+                                document.getElementById("steam1.3").style.background = "url('https://displate.com/displates/2019-02-24/2ae8ae6c7808bd54f2591e152434afd6_0a335c55b26d82383fc4e790f4cf2411.jpg?w=280&v=3')";
+                                document.getElementById("steam2.3").style.background = "url('https://lsglive.in/wp-content/uploads/2018/12/dota2-pc.jpg')";
+                            }
+                            if (newssteam === "1085660") {
+                                document.getElementById("steam1.3").style.background = "url('https://d2.destinygamewiki.com/mediawiki/images/thumb/4/46/Curse_of_Osiris.jpg/400px-Curse_of_Osiris.jpg')";
+                                document.getElementById("steam2.3").style.background = "url('https://www.booktopia.com.au/http_coversbooktopiacomau/big/9780359141555/0000/destiny-2-forsaken-game-exotics-raids-supers-armor-sets-achievements-weapons-classes-guide-unofficial.jpg')";
+                            }
+                            if (newssteam === "218620") {
+                                document.getElementById("steam1.3").style.background = "url('https://s3-ap-southeast-1.amazonaws.com/images.e-sentral.com/publishdrive/6610000061242-medium.jpg')";
+                                document.getElementById("steam2.3").style.background = "url('https://www.booktopia.com.au/http_coversbooktopiacomau/big/9781387707843/0000/payday-2-game-switch-ps4-xbox-one-vr-mods-blt-wiki-builds-masks-characters-tips-guide-unofficial.jpg')";
+                            }
+                            if (newssteam === "271590") {
+                                document.getElementById("steam1.3").style.background = "url('https://consequenceofsound.net/wp-content/uploads/2013/08/gta-51.jpeg')";
+                                document.getElementById("steam2.3").style.background = "url('https://i.ebayimg.com/images/g/4vEAAOSw~vNb~b9d/s-l400.jpg')";
+                            }
+                        },
+                        error: function (status) {
+                            console.log(status);
+                        }
+                    });
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+    }
+
+
+
+    $(document).ready(function () {
+        funIntervalweather();
+    });
+    var objIntervalweather;
+    function funIntervalweather()
+    {
+        var i = 0;
+        var numweather =  parseInt(document.getElementById("refeshmodeweather").value.toString());
+        var intervalweather =  numweather* 1000;
+        objIntervalweather = setInterval(function () {
+            i++;
+            if (i >= numweather)
+                clearInterval(objIntervalweather);
+            cache_clearweather();
+        }, intervalweather);
+    }
+
+    function cache_clearweather() {
+        console.log("TEST");
+        refreweather();
+    }
+
+    function refeshmodeweather(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalweather();
+    }
+
+    function refreweather() {
+        changem();
+        changement();
+    }
+
+
+
+    $(document).ready(function () {
+        funIntervalmeme();
+    });
+    var objIntervalmeme;
+    function funIntervalmeme()
+    {
+        var i = 0;
+        var nummeme =  parseInt(document.getElementById("refeshmodememe").value.toString());
+        var intervalmeme =  nummeme* 1000;
+        objIntervalmeme = setInterval(function () {
+            i++;
+            if (i >= nummeme)
+                clearInterval(objIntervalmeme);
+            cache_clearmeme();
+        }, intervalmeme);
+    }
+
+    function cache_clearmeme() {
+        console.log("TEST");
+        refrememe();
+    }
+
+    function refeshmodememe(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalmeme();
+    }
+
+//    var mytime = 10000;
+/*
+
+    function refeshmodememe() {
+        mytime = document.getElementById("refeshmodememe").value * 1000;
+    }
+
+    ///Timer
+    $(document).ready(function () {
+        setInterval(function () {
+            cache_clear()
+        }, mytime);
+    });
+
+    function cache_clear() {
+        console.log(mytime);
+        refrememe();
+    }
+*/
+
+    $(document).ready(function () {
+        funIntervalreddit();
+    });
+    var objIntervalrefeshmodereddit;
+    function funIntervalreddit()
+    {
+        var i = 0;
+        var numreddit =  parseInt(document.getElementById("refeshmodereddit").value.toString());
+        var intervalreddit =  numreddit* 1000;
+        objIntervalreddit = setInterval(function () {
+            i++;
+            if (i >= numreddit)
+                clearInterval(objIntervalreddit);
+            cache_clearreddit();
+        }, intervalreddit);
+    }
+
+    function cache_clearreddit() {
+        console.log("TEST");
+        refrereddit();
+    }
+
+    function refeshmodereddit(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalreddit();
+    }
+
+    function refrereddit() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/gettab",
+            success: function (data) {
+                console.log(data);
+                var vsteam = data[0];
+                var v2steam = data[1];
+                var vytb = data[2];
+                var vreddit = data[3];
+                var vmeme = data[4];
+                var vgiphy = data[5];
+                var vmusic = data[6];
+                var vtwitter = data[7];
+                var vgithub = data[8];
+                var redd = vreddit;
+                document.getElementById("1reddit").innerHTML = "Recherche: " + redd;
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/subreddit",
+                    data: {subReddit: redd},
+                    success: function (data) {
+                        var i = 0;
+                        var j = 0;
+                        while (i < 20) {
+                            if (i % 2 === 0) {
+                                var x = "1reddit" + j;
+                                document.getElementById(x).src = data[i];
+                                j++;
+                            }
+                            i++;
+                        }
+                    },
+                    error: function (status) {
+                        console.log(status);
+                    }
+                });
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        funIntervalreddit();
+    });
+    var objIntervalrefeshmodereddit;
+    function funIntervalreddit()
+    {
+        var i = 0;
+        var numreddit =  parseInt(document.getElementById("refeshmodereddit").value.toString());
+        var intervalreddit =  numreddit* 1000;
+        objIntervalreddit = setInterval(function () {
+            i++;
+            if (i >= numreddit)
+                clearInterval(objIntervalreddit);
+            cache_clearreddit();
+        }, intervalreddit);
+    }
+
+    function cache_clearreddit() {
+        console.log("TEST");
+        refrereddit();
+    }
+
+    function refeshmodereddit(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalreddit();
+    }
+
+    function refrereddit() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/gettab",
+            success: function (data) {
+                console.log(data);
+                var vsteam = data[0];
+                var v2steam = data[1];
+                var vytb = data[2];
+                var vreddit = data[3];
+                var vmeme = data[4];
+                var vgiphy = data[5];
+                var vmusic = data[6];
+                var vtwitter = data[7];
+                var vgithub = data[8];
+                var redd = vreddit;
+                document.getElementById("1reddit").innerHTML = "Recherche: " + redd;
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/subreddit",
+                    data: {subReddit: redd},
+                    success: function (data) {
+                        var i = 0;
+                        var j = 0;
+                        while (i < 20) {
+                            if (i % 2 === 0) {
+                                var x = "1reddit" + j;
+                                document.getElementById(x).src = data[i];
+                                j++;
+                            }
+                            i++;
+                        }
+                    },
+                    error: function (status) {
+                        console.log(status);
+                    }
+                });
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        funIntervalgiph();
+    });
+    var objIntervalrefeshmodegiph;
+    function funIntervalgiph()
+    {
+        var i = 0;
+        var numgiph =  parseInt(document.getElementById("refeshmodegiph").value.toString());
+        var intervalgiph =  numgiph* 1000;
+        objIntervalgiph = setInterval(function () {
+            i++;
+            if (i >= numgiph)
+                clearInterval(objIntervalgiph);
+            cache_cleargiph();
+        }, intervalgiph);
+    }
+
+    function cache_cleargiph() {
+        console.log("TEST");
+        refregiph();
+    }
+
+    function refeshmodegiph(obj)
+    {
+        var value = obj.value;
+        clearInterval(objInterval);
+        funIntervalgiph();
+    }
+
+    function refregiph() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/gettab",
+                success: function (data) {
+                    console.log(data);
+                    var vsteam = data[0];
+                    var v2steam = data[1];
+                    var vytb = data[2];
+                    var vreddit = data[3];
+                    var vmeme = data[4];
+                    var vgiphy = data[5];
+                    var vmusic = data[6];
+                    var vtwitter = data[7];
+                    var vgithub = data[8];
+                    var giph = vgiphy;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:8080/getgif",
+                        data: {gif: giph},
+                        success: function (data) {
+                            var r = data["data"];
+                            var i = 0;
+                            while (i < 10) {
+                                var x = "1meme" + i;
+                                document.getElementById(x).src = r[i].images.original.url;
+                                i++;
+                            }
+                        },
+                        error: function (status) {
+                            console.log(status);
+                        }
+                    });
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+    }
+
+    ///cinéma
+    var cin = "fr";
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/cinema",
+        data: {location: cin}, // parameters
+        success: function (data) {
+            document.getElementById('cine1').innerHTML = data[0][1];
+            document.getElementById('cine1.1').innerHTML = data[0][2];
+            document.getElementById("cine1.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[0][0] + "')";
+
+            document.getElementById('cine2').innerHTML = data[1][1];
+            document.getElementById('cine2.1').innerHTML = data[1][2];
+            document.getElementById("cine2.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[1][0] + "')";
+
+            document.getElementById('cine3').innerHTML = data[2][1];
+            document.getElementById('cine3.1').innerHTML = data[2][2];
+            document.getElementById("cine3.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[2][0] + "')";
+
+
+            document.getElementById('cine4').innerHTML = data[3][1];
+            document.getElementById('cine4.1').innerHTML = data[3][2];
+            document.getElementById("cine4.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[3][0] + "')";
+
+            document.getElementById('cine5').innerHTML = data[4][1];
+            document.getElementById('cine5.1').innerHTML = data[4][2];
+            document.getElementById("cine5.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[4][0] + "')";
+
+            document.getElementById('cine6').innerHTML = data[5][1];
+            document.getElementById('cine6.1').innerHTML = data[5][2];
+            document.getElementById("cine6.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[5][0] + "')";
+
+            document.getElementById('cine7').innerHTML = data[6][1];
+            document.getElementById('cine7.1').innerHTML = data[7][2];
+            document.getElementById("cine7.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[6][0] + "')";
+
+            document.getElementById('cine8').innerHTML = data[7][1];
+            document.getElementById('cine8.1').innerHTML = data[7][2];
+            document.getElementById("cine8.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[7][0] + "')";
+
+            document.getElementById('cine9').innerHTML = data[8][1];
+            document.getElementById('cine9.1').innerHTML = data[8][2];
+            document.getElementById("cine9.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[8][0] + "')";
+
+            document.getElementById('cine10').innerHTML = data[9][1];
+            document.getElementById('cine10.1').innerHTML = data[9][2];
+            document.getElementById("cine10.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[9][0] + "')";
+
+            document.getElementById('cine11').innerHTML = data[10][1];
+            document.getElementById('cine11.1').innerHTML = data[10][2];
+            document.getElementById("cine11.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[10][0] + "')";
+
+            document.getElementById('cine12').innerHTML = data[11][1];
+            document.getElementById('cine12.1').innerHTML = data[11][2];
+            document.getElementById("cine12.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[11][0] + "')";
+
+
+            document.getElementById('cine13').innerHTML = data[12][1];
+            document.getElementById('cine13.1').innerHTML = data[12][2];
+            document.getElementById("cine13.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[12][0] + "')";
+
+            document.getElementById('cine14').innerHTML = data[13][1];
+            document.getElementById('cine14.1').innerHTML = data[13][2];
+            document.getElementById("cine14.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[13][0] + "')";
+
+            document.getElementById('cine15').innerHTML = data[14][1];
+            document.getElementById('cine15.1').innerHTML = data[14][2];
+            document.getElementById("cine15.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[14][0] + "')";
+
+
+            document.getElementById('cine16').innerHTML = data[15][1];
+            document.getElementById('cine16.1').innerHTML = data[15][2];
+            document.getElementById("cine16.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[15][0] + "')";
+
+            document.getElementById('cine17').innerHTML = data[16][1];
+            document.getElementById('cine17.1').innerHTML = data[16][2];
+            document.getElementById("cine17.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[16][0] + "')";
+
+            document.getElementById('cine18').innerHTML = data[17][1];
+            document.getElementById('cine18.1').innerHTML = data[17][2];
+            document.getElementById("cine18.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[17][0] + "')";
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    function refrememe() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/gettab",
+            success: function (data) {
+                console.log(data);
+                var vsteam = data[0];
+                var v2steam = data[1];
+                var vytb = data[2];
+                var vreddit = data[3];
+                var vmeme = data[4];
+                var vgiphy = data[5];
+                var vmusic = data[6];
+                var vtwitter = data[7];
+                var vgithub = data[8];
+                var tweet = vtwitter;
+                var mymeme = vmeme;
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/gettrand",
+                    data: {catt: mymeme},
+                    success: function (data) {
+                        document.getElementById("meme0").src = data["0"]["url"];
+                    },
+                    error: function (status) {
+                        console.log(status);
+                    }
+                });
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/gettab",
+        success: function (data) {
+            console.log(data);
+            var vsteam = data[0];
+            var v2steam = data[1];
+            var vytb = data[2];
+            var vreddit = data[3];
+            var vmeme = data[4];
+            var vgiphy = data[5];
+            var vmusic = data[6];
+            var vtwitter = data[7];
+            var vgithub = data[8];
+
+            ///Twitter
+            var tweet = vtwitter;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/twitterTweetSearch",
+                data: {rechearch: tweet},
+                success: function (data) {
+                    var i = 0;
+                    while (i < 10) {
+                        var x = "1twitter" + i;
+                        document.getElementById(x).innerHTML = data[i];
+                        i++;
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///music
+            var mis = vmusic;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/getmusic",
+                data: {artist: mis},
+                success: function (data) {
+                    document.getElementById("playermusic1").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[0].id + "&app_id=1";
+                    document.getElementById("playermusic2").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[1].id + "&app_id=1";
+                    document.getElementById("playermusic3").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[2].id + "&app_id=1";
+                    document.getElementById("playermusic4").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[3].id + "&app_id=1";
+                    document.getElementById("playermusic5").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[4].id + "&app_id=1";
+                    document.getElementById("playermusic6").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[5].id + "&app_id=1";
+                    document.getElementById("playermusic7").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[6].id + "&app_id=1";
+                    document.getElementById("playermusic8").src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id=" + data.data[7].id + "&app_id=1";
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///meme
+            var mymeme = vmeme;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/gettrand",
+                data: {catt: mymeme},
+                success: function (data) {
+                    document.getElementById("meme0").src = data["0"]["url"];
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///Giphy
+            var giph = vgiphy;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/getgif",
+                data: {gif: giph},
+                success: function (data) {
+                    var r = data["data"];
+                    var i = 0;
+                    while (i < 10) {
+                        var x = "1meme" + i;
+                        document.getElementById(x).src = r[i].images.original.url;
+                        i++;
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///reddit
+            var redd = vreddit;
+            document.getElementById("1reddit").innerHTML = "Recherche: " + redd;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/subreddit",
+                data: {subReddit: redd},
+                success: function (data) {
+                    var i = 0;
+                    var j = 0;
+                    while (i < 20) {
+                        if (i % 2 === 0) {
+                            var x = "1reddit" + j;
+                            document.getElementById(x).src = data[i];
+                            j++;
+                        }
+                        i++;
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///Youtube
+            var myytb = vytb;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/youtubeVideoSearch",
+                data: {rechearch: myytb},
+                success: function (data) {
+                    var i = 0;
+                    while (i < 5) {
+                        var x = "1ytb" + i;
+                        var y = "1ytb" + i + ".1";
+                        document.getElementById(y).innerHTML = data[i][1];
+                        document.getElementById(x).src = data[i][5];
+                        i++;
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            ///steam
+            var mysteam = vsteam;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/getsteam",
+                data: {appid: mysteam},
+                success: function (data) {
+                    document.getElementById("number").innerHTML = data.response.player_count + " gamers connectés";
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+            var newssteam = v2steam;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/changing",
+                data: {c: newssteam},
+                success: function (data) {
+                    document.getElementById("steam1.1").innerHTML = data["appnews"]["newsitems"][0]["author"];
+                    document.getElementById("steam1").innerHTML = data["appnews"]["newsitems"][0]["title"];
+                    document.getElementById("launch1").href = data["appnews"]["newsitems"][0]["url"];
+                    document.getElementById("steam2.1").innerHTML = data["appnews"]["newsitems"][1]["author"];
+                    document.getElementById("steam2").innerHTML = data["appnews"]["newsitems"][1]["title"];
+                    document.getElementById("launch2").href = data["appnews"]["newsitems"][1]["url"];
+                    if (newssteam === "730") {
+                        document.getElementById("steam1.3").style.background = "url('https://s.starladder.com/assets/coreui/game/csgo-game-59e546b074a4be5c6ef3a7977c4f3cf5f1a6b5fb3f312f03c939b8d9f96650da.png')";
+                        document.getElementById("steam2.3").style.background = "url('https://se7en.ws/wp-content/uploads/2017/02/csgo_poster.png')";
+                    }
+                    if (newssteam === "570") {
+                        document.getElementById("steam1.3").style.background = "url('https://displate.com/displates/2019-02-24/2ae8ae6c7808bd54f2591e152434afd6_0a335c55b26d82383fc4e790f4cf2411.jpg?w=280&v=3')";
+                        document.getElementById("steam2.3").style.background = "url('https://lsglive.in/wp-content/uploads/2018/12/dota2-pc.jpg')";
+                    }
+                    if (newssteam === "1085660") {
+                        document.getElementById("steam1.3").style.background = "url('https://d2.destinygamewiki.com/mediawiki/images/thumb/4/46/Curse_of_Osiris.jpg/400px-Curse_of_Osiris.jpg')";
+                        document.getElementById("steam2.3").style.background = "url('https://www.booktopia.com.au/http_coversbooktopiacomau/big/9780359141555/0000/destiny-2-forsaken-game-exotics-raids-supers-armor-sets-achievements-weapons-classes-guide-unofficial.jpg')";
+                    }
+                    if (newssteam === "218620") {
+                        document.getElementById("steam1.3").style.background = "url('https://s3-ap-southeast-1.amazonaws.com/images.e-sentral.com/publishdrive/6610000061242-medium.jpg')";
+                        document.getElementById("steam2.3").style.background = "url('https://www.booktopia.com.au/http_coversbooktopiacomau/big/9781387707843/0000/payday-2-game-switch-ps4-xbox-one-vr-mods-blt-wiki-builds-masks-characters-tips-guide-unofficial.jpg')";
+                    }
+                    if (newssteam === "271590") {
+                        document.getElementById("steam1.3").style.background = "url('https://consequenceofsound.net/wp-content/uploads/2013/08/gta-51.jpeg')";
+                        document.getElementById("steam2.3").style.background = "url('https://i.ebayimg.com/images/g/4vEAAOSw~vNb~b9d/s-l400.jpg')";
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    ///research
+    var input = document.getElementById("inlineFormInputGroup");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("inlineFormInputGroup").click();
+        }
+    });
+
+    /// Weather
+    function changem() {
+        var city = document.getElementById("myInput").value;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/weatherprev",
+            data: {location: city},
+            success: function (data) {
+                var res = data["list"]["0"];
+                var temp;
+                if (res.weather[0].main === "Thunderstorm") {
+                    document.getElementById('pmyweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res.weather[0].main === "Drizzle") {
+                    document.getElementById('pmyweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res.weather[0].main === "Rain") {
+                    document.getElementById('pmyweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res.weather[0].main === "Clouds") {
+                    document.getElementById('pmyweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res.weather[0].main === "Snow") {
+                    document.getElementById('pmyweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res.weather[0].main === "Clear") {
+                    document.getElementById('pmyweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res.weather[0].main === "Mist") {
+                    document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Smoke") {
+                    document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res.weather[0].main === "Haze") {
+                    document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res.weather[0].main === "Fog") {
+                    document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Squall") {
+                    document.getElementById('pmyweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res.weather[0].main === "Tornado") {
+                    document.getElementById('pmyweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('pmyweatherimg').src = "/img/rain.gif";
+                    temp = res.weather[0].main
+                }
+                document.getElementById('poutput2').innerHTML = temp;
+                document.getElementById('poutput3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+                document.getElementById('poutputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+                document.getElementById('poutputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+                var res2 = data["list"]["1"];
+                if (res2.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p2myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res2.weather[0].main === "Drizzle") {
+                    document.getElementById('p2myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res2.weather[0].main === "Rain") {
+                    document.getElementById('p2myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res2.weather[0].main === "Clouds") {
+                    document.getElementById('p2myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res2.weather[0].main === "Snow") {
+                    document.getElementById('p2myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res2.weather[0].main === "Clear") {
+                    document.getElementById('p2myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res2.weather[0].main === "Mist") {
+                    document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res2.weather[0].main === "Smoke") {
+                    document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res2.weather[0].main === "Haze") {
+                    document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res2.weather[0].main === "Fog") {
+                    document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res2.weather[0].main === "Squall") {
+                    document.getElementById('p2myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res2.weather[0].main === "Tornado") {
+                    document.getElementById('p2myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p2myweatherimg').src = "/img/rain.gif";
+                    temp = res2.weather[0].main
+                }
+                document.getElementById('p2output2').innerHTML = temp;
+                document.getElementById('p2output3').innerHTML = "Température: " + parseInt(res2.main.temp - 273.15) + "° C";
+                document.getElementById('p2outputMIN').innerHTML = "Température minimum: " + parseInt(res2.main.temp_min - 273.15) + "° C";
+                document.getElementById('p2outputMAX').innerHTML = "Température maximum: " + parseInt(res2.main.temp_max - 273.15) + "° C";
+                res = data["list"]["2"];
+                if (res.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p3myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res.weather[0].main === "Drizzle") {
+                    document.getElementById('p3myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res.weather[0].main === "Rain") {
+                    document.getElementById('p3myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res.weather[0].main === "Clouds") {
+                    document.getElementById('p3myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res.weather[0].main === "Snow") {
+                    document.getElementById('p3myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res.weather[0].main === "Clear") {
+                    document.getElementById('p3myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res.weather[0].main === "Mist") {
+                    document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Smoke") {
+                    document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res.weather[0].main === "Haze") {
+                    document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res.weather[0].main === "Fog") {
+                    document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Squall") {
+                    document.getElementById('p3myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res.weather[0].main === "Tornado") {
+                    document.getElementById('p3myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p3myweatherimg').src = "/img/rain.gif";
+                    temp = res.weather[0].main
+                }
+                document.getElementById('p3output2').innerHTML = temp;
+                document.getElementById('p3output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+                document.getElementById('p3outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+                document.getElementById('p3outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+                res = data["list"]["3"];
+                if (res.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p4myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res.weather[0].main === "Drizzle") {
+                    document.getElementById('p4myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res.weather[0].main === "Rain") {
+                    document.getElementById('p4myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res.weather[0].main === "Clouds") {
+                    document.getElementById('p4myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res.weather[0].main === "Snow") {
+                    document.getElementById('p4myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res.weather[0].main === "Clear") {
+                    document.getElementById('p4myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res.weather[0].main === "Mist") {
+                    document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Smoke") {
+                    document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res.weather[0].main === "Haze") {
+                    document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res.weather[0].main === "Fog") {
+                    document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Squall") {
+                    document.getElementById('p4myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res.weather[0].main === "Tornado") {
+                    document.getElementById('p4myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p4myweatherimg').src = "/img/rain.gif";
+                    temp = res.weather[0].main
+                }
+                document.getElementById('p4output2').innerHTML = temp;
+                document.getElementById('p4output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+                document.getElementById('p4outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+                document.getElementById('p4outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+
+                res = data["list"]["4"];
+                if (res.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p5myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res.weather[0].main === "Drizzle") {
+                    document.getElementById('p5myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res.weather[0].main === "Rain") {
+                    document.getElementById('p5myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res.weather[0].main === "Clouds") {
+                    document.getElementById('p5myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res.weather[0].main === "Snow") {
+                    document.getElementById('p5myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res.weather[0].main === "Clear") {
+                    document.getElementById('p5myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res.weather[0].main === "Mist") {
+                    document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Smoke") {
+                    document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res.weather[0].main === "Haze") {
+                    document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res.weather[0].main === "Fog") {
+                    document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Squall") {
+                    document.getElementById('p5myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res.weather[0].main === "Tornado") {
+                    document.getElementById('p5myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p5myweatherimg').src = "/img/rain.gif";
+                    temp = res.weather[0].main
+                }
+                document.getElementById('p5output2').innerHTML = temp;
+                document.getElementById('p5output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+                document.getElementById('p5outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+                document.getElementById('p5outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+                var res2 = data["list"]["5"];
+                if (res2.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p6myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res2.weather[0].main === "Drizzle") {
+                    document.getElementById('p6myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res2.weather[0].main === "Rain") {
+                    document.getElementById('p6myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res2.weather[0].main === "Clouds") {
+                    document.getElementById('p6myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res2.weather[0].main === "Snow") {
+                    document.getElementById('p6myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res2.weather[0].main === "Clear") {
+                    document.getElementById('p6myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res2.weather[0].main === "Mist") {
+                    document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res2.weather[0].main === "Smoke") {
+                    document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res2.weather[0].main === "Haze") {
+                    document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res2.weather[0].main === "Fog") {
+                    document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res2.weather[0].main === "Squall") {
+                    document.getElementById('p6myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res2.weather[0].main === "Tornado") {
+                    document.getElementById('p6myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p6myweatherimg').src = "/img/rain.gif";
+                    temp = res2.weather[0].main
+                }
+                document.getElementById('p6output2').innerHTML = temp;
+                document.getElementById('p6output3').innerHTML = "Température: " + parseInt(res2.main.temp - 273.15) + "° C";
+                document.getElementById('p6outputMIN').innerHTML = "Température minimum: " + parseInt(res2.main.temp_min - 273.15) + "° C";
+                document.getElementById('p6outputMAX').innerHTML = "Température maximum: " + parseInt(res2.main.temp_max - 273.15) + "° C";
+                res = data["list"]["6"];
+                if (res.weather[0].main === "Thunderstorm") {
+                    document.getElementById('p7myweatherimg').src = "/img/thunderstorm.gif";
+                    temp = "Orage"
+                } else if (res.weather[0].main === "Drizzle") {
+                    document.getElementById('p7myweatherimg').src = "/img/Drizzle.gif";
+                    temp = "Bruine"
+                } else if (res.weather[0].main === "Rain") {
+                    document.getElementById('p7myweatherimg').src = "/img/Rain.gif";
+                    temp = "Pluie"
+                } else if (res.weather[0].main === "Clouds") {
+                    document.getElementById('p7myweatherimg').src = "/img/Clouds.gif";
+                    temp = "Nuageux"
+                } else if (res.weather[0].main === "Snow") {
+                    document.getElementById('p7myweatherimg').src = "/img/Snow.gif";
+                    temp = "Neige"
+                } else if (res.weather[0].main === "Clear") {
+                    document.getElementById('p7myweatherimg').src = "/img/Clear.gif";
+                    temp = "Ciel Dégagé"
+                } else if (res.weather[0].main === "Mist") {
+                    document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Smoke") {
+                    document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                    temp = "Enfumer"
+                } else if (res.weather[0].main === "Haze") {
+                    document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                    temp = "Brume"
+                } else if (res.weather[0].main === "Fog") {
+                    document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                    temp = "Brouillard"
+                } else if (res.weather[0].main === "Squall") {
+                    document.getElementById('p7myweatherimg').src = "/img/Squall.png";
+                    temp = "Bourrasque"
+                } else if (res.weather[0].main === "Tornado") {
+                    document.getElementById('p7myweatherimg').src = "/img/Tornado.gif";
+                    temp = "Tornade"
+                } else {
+                    document.getElementById('p7myweatherimg').src = "/img/rain.gif";
+                    temp = res.weather[0].main
+                }
+                document.getElementById('p7output2').innerHTML = temp;
+                document.getElementById('p7output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+                document.getElementById('p7outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+                document.getElementById('p7outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    ///Recherche
+    function changement() {
+        var searchweather = document.getElementById("inlineFormInputGroup").value;
+
+        ///weather
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/weather",
+            data: {location: searchweather}, // parameters
+            success: function (data) {
+                console.log(data);
+                if (data.name !== undefined) {
+                    document.getElementById('output').innerHTML = data.name;
+                    var temp;
+                    if (data.weather[0].main === "Thunderstorm") {
+                        document.getElementById('myweatherimg').src = "/img/thunderstorm.gif";
+                        temp = "Orage"
+                    } else if (data.weather[0].main === "Drizzle") {
+                        document.getElementById('myweatherimg').src = "/img/Drizzle.gif";
+                        temp = "Bruine"
+                    } else if (data.weather[0].main === "Rain") {
+                        document.getElementById('myweatherimg').src = "/img/Rain.gif";
+                        temp = "Pluie"
+                    } else if (data.weather[0].main === "Clouds") {
+                        document.getElementById('myweatherimg').src = "/img/Clouds.gif";
+                        temp = "Nuageux"
+                    } else if (data.weather[0].main === "Snow") {
+                        document.getElementById('myweatherimg').src = "/img/Snow.gif";
+                        temp = "Neige"
+                    } else if (data.weather[0].main === "Clear") {
+                        document.getElementById('myweatherimg').src = "/img/Clear.gif";
+                        temp = "Ciel Dégagé"
+                    } else if (data.weather[0].main === "Mist") {
+                        document.getElementById('myweatherimg').src = "/img/Mist.png";
+                        temp = "Brouillard"
+                    } else if (data.weather[0].main === "Smoke") {
+                        document.getElementById('myweatherimg').src = "/img/Mist.png";
+                        temp = "Enfumer"
+                    } else if (data.weather[0].main === "Haze") {
+                        document.getElementById('myweatherimg').src = "/img/Mist.png";
+                        temp = "Brume"
+                    } else if (data.weather[0].main === "Fog") {
+                        document.getElementById('myweatherimg').src = "/img/Mist.png";
+                        temp = "Brouillard"
+                    } else if (data.weather[0].main === "Squall") {
+                        document.getElementById('myweatherimg').src = "/img/Squall.png";
+                        temp = "Bourrasque"
+                    } else if (data.weather[0].main === "Tornado") {
+                        document.getElementById('myweatherimg').src = "/img/Tornado.gif";
+                        temp = "Tornade"
+                    } else {
+                        document.getElementById('myweatherimg').src = "/img/rain.gif";
+                        temp = data.weather[0].main
+                    }
+                    document.getElementById('output2').innerHTML = temp;
+                    document.getElementById('umid').innerHTML = "Humidité: " + (data.main.humidity + "%");
+                    document.getElementById('output3').innerHTML = "Température: " + parseInt(data.main.temp - 273.15) + "° C";
+                    document.getElementById('outputMIN').innerHTML = "Température minimum: " + parseInt(data.main.temp_min - 273.15) + "° C";
+                    document.getElementById('outputMAX').innerHTML = "Température maximum: " + parseInt(data.main.temp_max - 273.15) + "° C";
+
+                }
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
+    ///weather prevision
+    var prevweather = document.getElementById("myInput").value;
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/weatherprev",
+        data: {location: prevweather},
+        success: function (data) {
+            var res = data["list"]["0"];
+            var temp;
+            if (res.weather[0].main === "Thunderstorm") {
+                document.getElementById('pmyweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res.weather[0].main === "Drizzle") {
+                document.getElementById('pmyweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res.weather[0].main === "Rain") {
+                document.getElementById('pmyweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res.weather[0].main === "Clouds") {
+                document.getElementById('pmyweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res.weather[0].main === "Snow") {
+                document.getElementById('pmyweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res.weather[0].main === "Clear") {
+                document.getElementById('pmyweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res.weather[0].main === "Mist") {
+                document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Smoke") {
+                document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res.weather[0].main === "Haze") {
+                document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res.weather[0].main === "Fog") {
+                document.getElementById('pmyweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Squall") {
+                document.getElementById('pmyweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res.weather[0].main === "Tornado") {
+                document.getElementById('pmyweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('pmyweatherimg').src = "/img/rain.gif";
+                temp = res.weather[0].main
+            }
+            document.getElementById('poutput2').innerHTML = temp;
+            document.getElementById('poutput3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+            document.getElementById('poutputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+            document.getElementById('poutputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+            var res2 = data["list"]["1"];
+            if (res2.weather[0].main === "Thunderstorm") {
+                document.getElementById('p2myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res2.weather[0].main === "Drizzle") {
+                document.getElementById('p2myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res2.weather[0].main === "Rain") {
+                document.getElementById('p2myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res2.weather[0].main === "Clouds") {
+                document.getElementById('p2myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res2.weather[0].main === "Snow") {
+                document.getElementById('p2myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res2.weather[0].main === "Clear") {
+                document.getElementById('p2myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res2.weather[0].main === "Mist") {
+                document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res2.weather[0].main === "Smoke") {
+                document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res2.weather[0].main === "Haze") {
+                document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res2.weather[0].main === "Fog") {
+                document.getElementById('p2myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res2.weather[0].main === "Squall") {
+                document.getElementById('p2myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res2.weather[0].main === "Tornado") {
+                document.getElementById('p2myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p2myweatherimg').src = "/img/rain.gif";
+                temp = res2.weather[0].main
+            }
+            document.getElementById('p2output2').innerHTML = temp;
+            document.getElementById('p2output3').innerHTML = "Température: " + parseInt(res2.main.temp - 273.15) + "° C";
+            document.getElementById('p2outputMIN').innerHTML = "Température minimum: " + parseInt(res2.main.temp_min - 273.15) + "° C";
+            document.getElementById('p2outputMAX').innerHTML = "Température maximum: " + parseInt(res2.main.temp_max - 273.15) + "° C";
+            res = data["list"]["2"];
+            if (res.weather[0].main === "Thunderstorm") {
+                document.getElementById('p3myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res.weather[0].main === "Drizzle") {
+                document.getElementById('p3myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res.weather[0].main === "Rain") {
+                document.getElementById('p3myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res.weather[0].main === "Clouds") {
+                document.getElementById('p3myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res.weather[0].main === "Snow") {
+                document.getElementById('p3myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res.weather[0].main === "Clear") {
+                document.getElementById('p3myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res.weather[0].main === "Mist") {
+                document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Smoke") {
+                document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res.weather[0].main === "Haze") {
+                document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res.weather[0].main === "Fog") {
+                document.getElementById('p3myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Squall") {
+                document.getElementById('p3myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res.weather[0].main === "Tornado") {
+                document.getElementById('p3myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p3myweatherimg').src = "/img/rain.gif";
+                temp = res.weather[0].main
+            }
+            document.getElementById('p3output2').innerHTML = temp;
+            document.getElementById('p3output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+            document.getElementById('p3outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+            document.getElementById('p3outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+            res = data["list"]["3"];
+            if (res.weather[0].main === "Thunderstorm") {
+                document.getElementById('p4myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res.weather[0].main === "Drizzle") {
+                document.getElementById('p4myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res.weather[0].main === "Rain") {
+                document.getElementById('p4myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res.weather[0].main === "Clouds") {
+                document.getElementById('p4myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res.weather[0].main === "Snow") {
+                document.getElementById('p4myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res.weather[0].main === "Clear") {
+                document.getElementById('p4myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res.weather[0].main === "Mist") {
+                document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Smoke") {
+                document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res.weather[0].main === "Haze") {
+                document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res.weather[0].main === "Fog") {
+                document.getElementById('p4myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Squall") {
+                document.getElementById('p4myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res.weather[0].main === "Tornado") {
+                document.getElementById('p4myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p4myweatherimg').src = "/img/rain.gif";
+                temp = res.weather[0].main
+            }
+            document.getElementById('p4output2').innerHTML = temp;
+            document.getElementById('p4output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+            document.getElementById('p4outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+            document.getElementById('p4outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+
+            res = data["list"]["4"];
+            if (res.weather[0].main === "Thunderstorm") {
+                document.getElementById('p5myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res.weather[0].main === "Drizzle") {
+                document.getElementById('p5myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res.weather[0].main === "Rain") {
+                document.getElementById('p5myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res.weather[0].main === "Clouds") {
+                document.getElementById('p5myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res.weather[0].main === "Snow") {
+                document.getElementById('p5myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res.weather[0].main === "Clear") {
+                document.getElementById('p5myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res.weather[0].main === "Mist") {
+                document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Smoke") {
+                document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res.weather[0].main === "Haze") {
+                document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res.weather[0].main === "Fog") {
+                document.getElementById('p5myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Squall") {
+                document.getElementById('p5myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res.weather[0].main === "Tornado") {
+                document.getElementById('p5myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p5myweatherimg').src = "/img/rain.gif";
+                temp = res.weather[0].main
+            }
+            document.getElementById('p5output2').innerHTML = temp;
+            document.getElementById('p5output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+            document.getElementById('p5outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+            document.getElementById('p5outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+            var res2 = data["list"]["5"];
+            if (res2.weather[0].main === "Thunderstorm") {
+                document.getElementById('p6myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res2.weather[0].main === "Drizzle") {
+                document.getElementById('p6myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res2.weather[0].main === "Rain") {
+                document.getElementById('p6myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res2.weather[0].main === "Clouds") {
+                document.getElementById('p6myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res2.weather[0].main === "Snow") {
+                document.getElementById('p6myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res2.weather[0].main === "Clear") {
+                document.getElementById('p6myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res2.weather[0].main === "Mist") {
+                document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res2.weather[0].main === "Smoke") {
+                document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res2.weather[0].main === "Haze") {
+                document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res2.weather[0].main === "Fog") {
+                document.getElementById('p6myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res2.weather[0].main === "Squall") {
+                document.getElementById('p6myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res2.weather[0].main === "Tornado") {
+                document.getElementById('p6myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p6myweatherimg').src = "/img/rain.gif";
+                temp = res2.weather[0].main
+            }
+            document.getElementById('p6output2').innerHTML = temp;
+            document.getElementById('p6output3').innerHTML = "Température: " + parseInt(res2.main.temp - 273.15) + "° C";
+            document.getElementById('p6outputMIN').innerHTML = "Température minimum: " + parseInt(res2.main.temp_min - 273.15) + "° C";
+            document.getElementById('p6outputMAX').innerHTML = "Température maximum: " + parseInt(res2.main.temp_max - 273.15) + "° C";
+            res = data["list"]["6"];
+            if (res.weather[0].main === "Thunderstorm") {
+                document.getElementById('p7myweatherimg').src = "/img/thunderstorm.gif";
+                temp = "Orage"
+            } else if (res.weather[0].main === "Drizzle") {
+                document.getElementById('p7myweatherimg').src = "/img/Drizzle.gif";
+                temp = "Bruine"
+            } else if (res.weather[0].main === "Rain") {
+                document.getElementById('p7myweatherimg').src = "/img/Rain.gif";
+                temp = "Pluie"
+            } else if (res.weather[0].main === "Clouds") {
+                document.getElementById('p7myweatherimg').src = "/img/Clouds.gif";
+                temp = "Nuageux"
+            } else if (res.weather[0].main === "Snow") {
+                document.getElementById('p7myweatherimg').src = "/img/Snow.gif";
+                temp = "Neige"
+            } else if (res.weather[0].main === "Clear") {
+                document.getElementById('p7myweatherimg').src = "/img/Clear.gif";
+                temp = "Ciel Dégagé"
+            } else if (res.weather[0].main === "Mist") {
+                document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Smoke") {
+                document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                temp = "Enfumer"
+            } else if (res.weather[0].main === "Haze") {
+                document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                temp = "Brume"
+            } else if (res.weather[0].main === "Fog") {
+                document.getElementById('p7myweatherimg').src = "/img/Mist.png";
+                temp = "Brouillard"
+            } else if (res.weather[0].main === "Squall") {
+                document.getElementById('p7myweatherimg').src = "/img/Squall.png";
+                temp = "Bourrasque"
+            } else if (res.weather[0].main === "Tornado") {
+                document.getElementById('p7myweatherimg').src = "/img/Tornado.gif";
+                temp = "Tornade"
+            } else {
+                document.getElementById('p7myweatherimg').src = "/img/rain.gif";
+                temp = res.weather[0].main
+            }
+            document.getElementById('p7output2').innerHTML = temp;
+            document.getElementById('p7output3').innerHTML = "Température: " + parseInt(res.main.temp - 273.15) + "° C";
+            document.getElementById('p7outputMIN').innerHTML = "Température minimum: " + parseInt(res.main.temp_min - 273.15) + "° C";
+            document.getElementById('p7outputMAX').innerHTML = "Température maximum: " + parseInt(res.main.temp_max - 273.15) + "° C";
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    ///menu dash
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/userparse",
+        success: function (data) {
+            if (data[0] === "false") {
+                document.getElementById('dweather').style.display = "none";
+                document.getElementById('weather').style.display = "none";
+            }
+            if (data[1] === "false") {
+                document.getElementById('dcine').style.display = "none";
+                document.getElementById('cinema').style.display = "none";
+            }
+            if (data[2] === "false") {
+                document.getElementById('dytb').style.display = "none";
+                document.getElementById('ytb').style.display = "none";
+            }
+            if (data[3] === "false") {
+                document.getElementById('dmap').style.display = "none";
+            }
+            if (data[4] === "false") {
+                document.getElementById('dred').style.display = "none";
+                document.getElementById('reddit').style.display = "none";
+            }
+            if (data[5] === "false") {
+                document.getElementById('dsteam').style.display = "none";
+                document.getElementById('steam').style.display = "none";
+            }
+            if (data[6] === "false") {
+                document.getElementById('dmeme').style.display = "none";
+                document.getElementById('meme').style.display = "none";
+            }
+            if (data[7] === "false") {
+                document.getElementById('dlip').style.display = "none";
+            }
+            if (data[8] === "false") {
+                document.getElementById('ddeez').style.display = "none";
+                document.getElementById('music').style.display = "none";
+            }
+            if (data[9] === "false") {
+                document.getElementById('dtwit').style.display = "none";
+                document.getElementById('twitter').style.display = "none";
+            }
+            if (data[10] === "false") {
+                document.getElementById('dgith').style.display = "none";
+            }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    ///change weather
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/getuser",
+        success: function (data) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/weather",
+                data: {location: data}, // parameters
+                success: function (data) {
+                    if (data.name !== undefined) {
+                        document.getElementById('output').innerHTML = data.name;
+                        var temp;
+                        if (data.weather[0].main === "Thunderstorm") {
+                            document.getElementById('myweatherimg').src = "/img/thunderstorm.gif";
+                            temp = "Orage"
+                        } else if (data.weather[0].main === "Drizzle") {
+                            document.getElementById('myweatherimg').src = "/img/Drizzle.gif";
+                            temp = "Bruine"
+                        } else if (data.weather[0].main === "Rain") {
+                            document.getElementById('myweatherimg').src = "/img/Rain.gif";
+                            temp = "Pluie"
+                        } else if (data.weather[0].main === "Clouds") {
+                            document.getElementById('myweatherimg').src = "/img/Clouds.gif";
+                            temp = "Nuageux"
+                        } else if (data.weather[0].main === "Snow") {
+                            document.getElementById('myweatherimg').src = "/img/Snow.gif";
+                            temp = "Neige"
+                        } else if (data.weather[0].main === "Clear") {
+                            document.getElementById('myweatherimg').src = "/img/Clear.gif";
+                            temp = "Ciel Dégagé"
+                        } else if (data.weather[0].main === "Mist") {
+                            document.getElementById('myweatherimg').src = "/img/Mist.png";
+                            temp = "Brouillard"
+                        } else if (data.weather[0].main === "Smoke") {
+                            document.getElementById('myweatherimg').src = "/img/Mist.png";
+                            temp = "Enfumer"
+                        } else if (data.weather[0].main === "Haze") {
+                            document.getElementById('myweatherimg').src = "/img/Mist.png";
+                            temp = "Brume"
+                        } else if (data.weather[0].main === "Fog") {
+                            document.getElementById('myweatherimg').src = "/img/Mist.png";
+                            temp = "Brouillard"
+                        } else if (data.weather[0].main === "Squall") {
+                            document.getElementById('myweatherimg').src = "/img/Squall.png";
+                            temp = "Bourrasque"
+                        } else if (data.weather[0].main === "Tornado") {
+                            document.getElementById('myweatherimg').src = "/img/Tornado.gif";
+                            temp = "Tornade"
+                        } else {
+                            document.getElementById('myweatherimg').src = "/img/rain.gif";
+                            temp = data.weather[0].main
+                        }
+                        document.getElementById('output2').innerHTML = temp;
+                        document.getElementById('umid').innerHTML = "Humidité: " + (data.main.humidity + "%");
+                        document.getElementById('output3').innerHTML = "Température: " + parseInt(data.main.temp - 273.15) + "° C";
+                        document.getElementById('outputMIN').innerHTML = "Température minimum: " + parseInt(data.main.temp_min - 273.15) + "° C";
+                        document.getElementById('outputMAX').innerHTML = "Température maximum: " + parseInt(data.main.temp_max - 273.15) + "° C";
+                    }
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+</script>
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap-notify.js}"></script>
+<script th:src="@{/assets/js/black-dashboard.min.js}"></script>
+<script th:src="@{/assets/demo/demo.js}"></script>
+<script>
+    $(document).ready(function () {
+        $().ready(function () {
+            $sidebar = $('.sidebar');
+            $navbar = $('.navbar');
+            $main_panel = $('.main-panel');
+
+            $full_page = $('.full-page');
+
+            $sidebar_responsive = $('body > .navbar-collapse');
+            sidebar_mini_active = true;
+            white_color = false;
+
+            window_width = $(window).width();
+
+            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+            $('.fixed-plugin a').click(function (event) {
+                if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                }
+            });
+
+            $('.fixed-plugin .background-color span').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+
+                var new_color = $(this).data('color');
+
+                if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                }
+
+                if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                }
+
+                if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                }
+            });
+
+            $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                }
+                var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 180);
+                setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                }, 1000);
+            });
+
+            $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').addClass('white-content');
+                    }, 900);
+
+                    white_color = true;
+                }
+
+
+            });
+
+            $('.light-badge').click(function () {
+                $('body').addClass('white-content');
+            });
+
+            $('.dark-badge').click(function () {
+                $('body').removeClass('white-content');
+            });
+        });
+    });
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS &&
+    TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+    });
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#draggable").draggable();
+    });
+    $(function () {
+        $("#draggable2").draggable();
+    });
+
+    $(function () {
+        $("#cinema").draggable();
+    });
+    $(function () {
+        $("#ytb").draggable();
+    });
+    $(function () {
+        $("#meme1").draggable();
+    });
+    $(function () {
+        $("#meme2").draggable();
+    });
+    $(function () {
+        $("#steam").draggable();
+    });
+    $(function () {
+        $("#reddit").draggable();
+    });
+    $(function () {
+        $("#music").draggable();
+    });
+    $(function () {
+        $("#twitter").draggable();
+    });
+</script>
+
+</body>
+</html>

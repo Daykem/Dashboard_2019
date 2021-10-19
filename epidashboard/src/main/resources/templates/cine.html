@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>Epiboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/black-dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/demo/demo.css}" rel="stylesheet"/>
+</head>
+
+<style>
+    .dropdown-menu-center {
+        left: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-50%, 0) !important;
+    }
+
+    .dropbtn {
+        background-color: #1e1e2d;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #005c8e;
+    }
+
+    #myInput {
+        box-sizing: border-box;
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        padding: 14px 20px 12px 45px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #myInput:focus {
+        outline: 3px solid #ddd;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+</style>
+<style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #e9e9e9;
+    font-family: 'Arimo', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #010b26;
+}
+
+* {
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: #6ABCEA;
+}
+
+.movie-card {
+    background: #ffffff;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 315px;
+    margin: 2em;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.header-icon-container {
+    position: relative;
+}
+
+.header-icon {
+    width: 100%;
+    height: 367px;
+    line-height: 367px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 54px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6ABCEA;
+    opacity: .85;
+}
+
+.header-icon:hover {
+    background: rgba(0, 0, 0, 0.15);
+    font-size: 74px;
+    text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6ABCEA;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity: 1;
+}
+
+.movie-card:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.movie-content {
+    padding: 18px 18px 24px 18px;
+    margin: 0;
+}
+
+.movie-content-header, .movie-info {
+    display: table;
+    width: 100%;
+}
+
+.movie-title {
+    font-size: 24px;
+    margin: 0;
+    display: table-cell;
+}
+
+.movie-info {
+    margin-top: 1em;
+}
+
+.info-section {
+    display: table-cell;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.info-section:first-of-type {
+    text-align: left;
+}
+
+.info-section:last-of-type {
+    text-align: right;
+}
+
+.info-section label {
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: .5em;
+    font-size: 9px;
+}
+
+.info-section span {
+    font-weight: 700;
+    font-size: 11px;
+    max-lines: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 500px) {
+    .movie-card {
+        width: 95%;
+        max-width: 95%;
+        margin: 1em;
+        display: block;
+    }
+}
+</style>
+
+<body class="">
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a th:href="@{/dashboard}">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/userr}">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li class="active " id="dcine">
+                    <a th:href="@{/cine}">
+                        <i class="tim-icons icon-video-66"></i>
+                        <p>Cinéma</p>
+                    </a>
+                </li>
+                <li id="dmap">
+                    <a th:href="@{/map}">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li id="dsteam">
+                    <a th:href="@{/notif}">
+                        <i class="tim-icons icon-world"></i>
+                        <p>Steam</p>
+                    </a>
+                </li>
+                <li id="dytb">
+                    <a th:href="@{/ytb}">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                        <p>Youtube</p>
+                    </a>
+                </li>
+                <li id="dred">
+                    <a th:href="@{/reddit}">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Reddit</p>
+                    </a>
+                </li>
+                <li id="dmeme">
+                    <a th:href="@{/rand}">
+                        <i class="tim-icons icon-satisfied"></i>
+                        <p>Meme</p>
+                    </a>
+                </li>
+                <li id="dlip">
+                    <a th:href="@{/whereip}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Localise IP</p>
+                    </a>
+                </li>
+                <li id="ddeez">
+                    <a th:href="@{/music}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Music</p>
+                    </a>
+                </li>
+                <li id="dtwit">
+                    <a th:href="@{/tw}">
+                        <i class="tim-icons icon-chat-33"></i>
+                        <p>Twitter</p>
+                    </a>
+                </li>
+                <li id="dgith">
+                    <a th:href="@{/gith}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Github</p>
+                    </a>
+                </li>
+                <li id="dtwitch">
+                    <a th:href="@{/twitch}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Twitch</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle d-inline">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:void(0)">Cinéma</a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="search-bar input-group">
+                            <button class="btn btn-link" id="search-button" data-toggle="modal"
+                                    data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
+                                <span class="d-lg-none d-md-block">Search</span>
+                            </button>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <div class="photo">
+                                    <img th:src="@{/assets/img/anime3.png}" alt="Profile Photo">
+                                </div>
+                                <b class="caret d-none d-lg-block d-xl-block"></b>
+                                <p class="d-lg-none">
+                                    Log out
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li class="nav-link"><a th:href="@{/userr}" class="nav-item dropdown-item">Profile</a>
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li class="nav-link"><a th:href="@{/}" class="nav-item dropdown-item">Log out</a></li>
+                            </ul>
+                        </li>
+                        <li class="separator d-lg-none"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <select id="myInput" class="dropbtn" onchange="changement()">
+                    <option onclick="changement()" value="fr">France</option>
+                    <option onclick="changement()" value="en-US">English</option>
+                    <option onclick="changement()" value="ru-RU">Russe</option>
+                    <option onclick="changement()" value="en-ca">Canada</option>
+                    <option onclick="changement()" value="ja">Japon</option>
+                    <option onclick="changement()" value="es">Espagne</option>
+                </select>
+            </div>
+        </nav>
+        <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input onclick="changment()" type="text" class="form-control" id="inlineFormInputGroup"
+                               placeholder="Recherche" value="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="alaffiche">
+            <div id="car1" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output1.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output1">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output1.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                    <div class="info-section">
+                            <label></label>
+                            <span id="output1.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+            <div id="car2" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output2.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output2">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output2.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output2.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car3" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output3.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output3">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output3.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output3.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+
+            <div id="car4" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output4.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output4">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output4.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output4.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car5" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output5.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output5">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output5.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output5.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car6" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output6.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output6">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output6.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output6.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car7" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output7.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output7">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output7.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output7.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car8" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output8.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output8">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output8.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output8.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car9" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output9.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output9">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output9.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output9.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car10" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output10.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output10">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output10.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output10.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car11" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output11.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output11">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output11.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output11.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car12" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output12.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output12">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output12.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output12.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+
+            <div id="car13" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output13.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output13">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output13.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output13.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car14" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output14.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output14">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output14.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output14.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car15" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output15.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output15">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output15.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output15.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car16" style="margin-left: 500px; margin-top: 100px" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output16.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output16">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output16.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output16.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car17" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output17.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output17">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output17.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output17.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+
+            <div id="car18" class="movie-card">
+                <div style="background-size: cover; background: #1d253b" id="output18.3">
+                    <div class="header-icon-container">
+                        <a href="#">
+                            <i class="material-icons header-icon"></i>
+                        </a>
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h3 class="movie-title" style="color: #0a0c0d" id="output18">Loading...</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span id="output18.1"></span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label></label>
+                            <span id="output18.2"></span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label></label>
+                            <span></span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+            </div><!--movie-card-->
+        </div>
+    </div><!--container-->
+</div>
+</div>
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <select id="refeshmode" class="dropbtn" onchange="changement()" style="margin-top: -15px">
+                    <option onclick="changement()" value="30">30 secondes</option>
+                    <option onclick="changement()" value="60">1 minutes</option>
+                    <option onclick="changement()" value="120">2 minutes</option>
+                    <option onclick="changement()" value="300">5 minutes</option>
+                    <option onclick="changement()" value="600">10 minutes</option>
+                </select>
+            </li>
+        </ul>
+    </div>
+</div>
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap-notify.js}"></script>
+<script th:src="@{/assets/js/black-dashboard.min.js}"></script>
+<script th:src="@{/assets/demo/demo.js}"></script>
+
+<script>
+    var input = document.getElementById("inlineFormInputGroup");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("inlineFormInputGroup").click();
+        }
+    });
+
+    function changment() {
+        var a = document.getElementById("inlineFormInputGroup").value;
+        if (a !== null || a !== "") {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/cici",
+                data: {location: a}, // parameters
+                success: function (data) {
+                    var j = 1;
+/*                    while (j < 19) {
+                        var x = "car" + j;
+                        document.getElementById(x).style.display = "none";
+                        j++;
+                    }*/
+                    console.log(data);
+                    console.log(data["results"]);
+                    console.log(data["results"][0]);
+                    console.log(data["results"][0].original_title);
+                    var i = 0;
+                    while (i < (data["results"].length - 1) && i < 18) {
+                        var x = "car" + (i + 1);
+                        console.log(x);
+//                        document.getElementById(x).style.display = "block";
+                        var o1 = "output" + (i + 1);
+                        var o1d = "output" + (i + 1) + ".1";
+                        var o1a = "output" + (i + 1) + ".2";
+                        var o1c = "output" + (i + 1) + ".3";
+                        document.getElementById(o1).innerHTML = data["results"][i].original_title;
+                        document.getElementById(o1d).innerHTML = data["results"][i].release_date;
+                        document.getElementById(o1a).innerHTML = data["results"][i].overview;
+                        document.getElementById(o1c).style.background = "url('http://image.tmdb.org/t/p/w185/" + data["results"][i].poster_path + "')";
+                        i++;
+                    }
+                    while (i < 19) {
+                        var x = "car" + i;
+                        document.getElementById(x).style.display = "none";
+                        i++;
+                    }
+//                    document.getElementById('output').innerHTML = data.name;
+                },
+                error: function (status) {
+                    console.log("FAIL");
+                    console.log(status);
+                }
+            });
+        }
+    }
+</script>
+<script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/userparse",
+        success: function (data) {
+            console.log(data);
+            if (data[1] === "false") {
+                document.getElementById('dcine').style.display = "none";
+            }
+            if (data[2] === "false") {
+                document.getElementById('dytb').style.display = "none";
+            }
+            if (data[3] === "false") {
+                document.getElementById('dmap').style.display = "none";
+            }
+            if (data[4] === "false") {
+                document.getElementById('dred').style.display = "none";
+            }
+            if (data[5] === "false") {
+                document.getElementById('dsteam').style.display = "none";
+            }
+            if (data[6] === "false") {
+                document.getElementById('dmeme').style.display = "none";
+            }
+            if (data[7] === "false") {
+                document.getElementById('dlip').style.display = "none";
+            }
+            if (data[8] === "false") {
+                document.getElementById('ddeez').style.display = "none";
+            }
+            if (data[9] === "false") {
+                document.getElementById('dtwit').style.display = "none";
+            }
+            if (data[10] === "false") {
+                document.getElementById('dgith').style.display = "none";
+            }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+
+    function changement() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/cinema",
+            data: {location: document.getElementById("myInput").value}, // parameters
+            success: function (data) {
+                console.log(data);
+                document.getElementById('output1').innerHTML = data[0][1];
+                document.getElementById('output1.1').innerHTML = data[0][2];
+                document.getElementById("output1.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[0][0] + "')";
+
+                document.getElementById('output2').innerHTML = data[1][1];
+                document.getElementById('output2.1').innerHTML = data[1][2];
+                document.getElementById("output2.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[1][0] + "')";
+
+                document.getElementById('output3').innerHTML = data[2][1];
+                document.getElementById('output3.1').innerHTML = data[2][2];
+                document.getElementById("output3.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[2][0] + "')";
+
+
+                document.getElementById('output4').innerHTML = data[3][1];
+                document.getElementById('output4.1').innerHTML = data[3][2];
+                document.getElementById("output4.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[3][0] + "')";
+
+                document.getElementById('output5').innerHTML = data[4][1];
+                document.getElementById('output5.1').innerHTML = data[4][2];
+                document.getElementById("output5.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[4][0] + "')";
+
+                document.getElementById('output6').innerHTML = data[5][1];
+                document.getElementById('output6.1').innerHTML = data[5][2];
+                document.getElementById("output6.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[5][0] + "')";
+
+                document.getElementById('output7').innerHTML = data[6][1];
+                document.getElementById('output7.1').innerHTML = data[7][2];
+                document.getElementById("output7.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[6][0] + "')";
+
+                document.getElementById('output8').innerHTML = data[7][1];
+                document.getElementById('output8.1').innerHTML = data[7][2];
+                document.getElementById("output8.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[7][0] + "')";
+
+                document.getElementById('output9').innerHTML = data[8][1];
+                document.getElementById('output9.1').innerHTML = data[8][2];
+                document.getElementById("output9.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[8][0] + "')";
+
+                document.getElementById('output10').innerHTML = data[9][1];
+                document.getElementById('output10.1').innerHTML = data[9][2];
+                document.getElementById("output10.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[9][0] + "')";
+
+                document.getElementById('output11').innerHTML = data[10][1];
+                document.getElementById('output11.1').innerHTML = data[10][2];
+                document.getElementById("output11.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[10][0] + "')";
+
+                document.getElementById('output12').innerHTML = data[11][1];
+                document.getElementById('output12.1').innerHTML = data[11][2];
+                document.getElementById("output12.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[11][0] + "')";
+
+
+                document.getElementById('output13').innerHTML = data[12][1];
+                document.getElementById('output13.1').innerHTML = data[12][2];
+                document.getElementById("output13.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[12][0] + "')";
+
+                document.getElementById('output14').innerHTML = data[13][1];
+                document.getElementById('output14.1').innerHTML = data[13][2];
+                document.getElementById("output14.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[13][0] + "')";
+
+                document.getElementById('output15').innerHTML = data[14][1];
+                document.getElementById('output15.1').innerHTML = data[14][2];
+                document.getElementById("output15.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[14][0] + "')";
+
+
+                document.getElementById('output16').innerHTML = data[15][1];
+                document.getElementById('output16.1').innerHTML = data[15][2];
+                document.getElementById("output16.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[15][0] + "')";
+
+                document.getElementById('output17').innerHTML = data[16][1];
+                document.getElementById('output17.1').innerHTML = data[16][2];
+                document.getElementById("output17.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[16][0] + "')";
+
+                document.getElementById('output18').innerHTML = data[17][1];
+                document.getElementById('output18.1').innerHTML = data[17][2];
+                document.getElementById("output18.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[17][0] + "')";
+                //data.original_title=Joker,
+                //data.release_date=2019-10-04}
+                //data.poster_path=/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg,
+                //data.overview=During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/cinema",
+        data: {location: "fr"}, // parameters
+        success: function (data) {
+            console.log(data);
+            document.getElementById('output1').innerHTML = data[0][1];
+            document.getElementById('output1.1').innerHTML = data[0][2];
+            document.getElementById("output1.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[0][0] + "')";
+
+            document.getElementById('output2').innerHTML = data[1][1];
+            document.getElementById('output2.1').innerHTML = data[1][2];
+            document.getElementById("output2.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[1][0] + "')";
+
+            document.getElementById('output3').innerHTML = data[2][1];
+            document.getElementById('output3.1').innerHTML = data[2][2];
+            document.getElementById("output3.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[2][0] + "')";
+
+
+            document.getElementById('output4').innerHTML = data[3][1];
+            document.getElementById('output4.1').innerHTML = data[3][2];
+            document.getElementById("output4.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[3][0] + "')";
+
+            document.getElementById('output5').innerHTML = data[4][1];
+            document.getElementById('output5.1').innerHTML = data[4][2];
+            document.getElementById("output5.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[4][0] + "')";
+
+            document.getElementById('output6').innerHTML = data[5][1];
+            document.getElementById('output6.1').innerHTML = data[5][2];
+            document.getElementById("output6.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[5][0] + "')";
+
+            document.getElementById('output7').innerHTML = data[6][1];
+            document.getElementById('output7.1').innerHTML = data[7][2];
+            document.getElementById("output7.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[6][0] + "')";
+
+            document.getElementById('output8').innerHTML = data[7][1];
+            document.getElementById('output8.1').innerHTML = data[7][2];
+            document.getElementById("output8.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[7][0] + "')";
+
+            document.getElementById('output9').innerHTML = data[8][1];
+            document.getElementById('output9.1').innerHTML = data[8][2];
+            document.getElementById("output9.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[8][0] + "')";
+
+            document.getElementById('output10').innerHTML = data[9][1];
+            document.getElementById('output10.1').innerHTML = data[9][2];
+            document.getElementById("output10.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[9][0] + "')";
+
+            document.getElementById('output11').innerHTML = data[10][1];
+            document.getElementById('output11.1').innerHTML = data[10][2];
+            document.getElementById("output11.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[10][0] + "')";
+
+            document.getElementById('output12').innerHTML = data[11][1];
+            document.getElementById('output12.1').innerHTML = data[11][2];
+            document.getElementById("output12.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[11][0] + "')";
+
+
+            document.getElementById('output13').innerHTML = data[12][1];
+            document.getElementById('output13.1').innerHTML = data[12][2];
+            document.getElementById("output13.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[12][0] + "')";
+
+            document.getElementById('output14').innerHTML = data[13][1];
+            document.getElementById('output14.1').innerHTML = data[13][2];
+            document.getElementById("output14.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[13][0] + "')";
+
+            document.getElementById('output15').innerHTML = data[14][1];
+            document.getElementById('output15.1').innerHTML = data[14][2];
+            document.getElementById("output15.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[14][0] + "')";
+
+
+            document.getElementById('output16').innerHTML = data[15][1];
+            document.getElementById('output16.1').innerHTML = data[15][2];
+            document.getElementById("output16.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[15][0] + "')";
+
+            document.getElementById('output17').innerHTML = data[16][1];
+            document.getElementById('output17.1').innerHTML = data[16][2];
+            document.getElementById("output17.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[16][0] + "')";
+
+            document.getElementById('output18').innerHTML = data[17][1];
+            document.getElementById('output18.1').innerHTML = data[17][2];
+            document.getElementById("output18.3").style.background = "url('http://image.tmdb.org/t/p/w185/" + data[17][0] + "')";
+            //data.original_title=Joker,
+            //data.release_date=2019-10-04}
+            //data.poster_path=/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg,
+            //data.overview=During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $().ready(function () {
+            $sidebar = $('.sidebar');
+            $navbar = $('.navbar');
+            $main_panel = $('.main-panel');
+
+            $full_page = $('.full-page');
+
+            $sidebar_responsive = $('body > .navbar-collapse');
+            sidebar_mini_active = true;
+            white_color = false;
+
+            window_width = $(window).width();
+
+            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+            $('.fixed-plugin a').click(function (event) {
+                if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                }
+            });
+
+            $('.fixed-plugin .background-color span').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+
+                var new_color = $(this).data('color');
+
+                if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                }
+
+                if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                }
+
+                if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                }
+            });
+
+            $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                }
+
+                // we simulate the window Resize so the charts will get updated in realtime.
+                var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 180);
+
+                // we stop the simulation of Window Resize after the animations are completed
+                setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                }, 1000);
+            });
+
+            $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').addClass('white-content');
+                    }, 900);
+
+                    white_color = true;
+                }
+
+
+            });
+
+            $('.light-badge').click(function () {
+                $('body').addClass('white-content');
+            });
+
+            $('.dark-badge').click(function () {
+                $('body').removeClass('white-content');
+            });
+        });
+    });
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS &&
+    TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+    });
+</script>
+</body>
+</html>

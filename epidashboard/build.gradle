@@ -1,0 +1,99 @@
+buildscript {
+	repositories {
+		maven { url "https://repo.spring.io/libs-milestone" }
+		maven { url "https://repo.spring.io/libs-snapshot" }
+		mavenLocal()
+	}
+	dependencies {
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'fr.dashboard.server'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/milestone" }
+	maven { url "https://repo.spring.io/libs-milestone" }
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.springframework.boot:spring-boot-starter-test")
+    compile 'org.twitter4j:twitter4j-stream:4.0.6'
+	compile 'org.springframework.social:spring-social-facebook:3.0.0.M1'
+	compile 'org.springframework.social:spring-social-core:2.0.0.M2'
+	compile	'org.springframework.social:spring-social-config:2.0.0.M2'
+	implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:1.1.2'
+	compile group: 'org.facebook4j', name: 'facebook4j-core', version: '2.4.13'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
+
+	// https://mvnrepository.com/artifact/com.google.api-client/google-api-client
+	compile group: 'com.google.api-client', name: 'google-api-client', version: '1.25.0'
+
+	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-youtube
+	compile group: 'com.google.apis', name: 'google-api-services-youtube', version: 'v3-rev212-1.25.0'
+
+	compile group: 'com.google.apis', name: 'google-api-services-youtubeAnalytics', version: 'v1-rev14-1.13.2-beta'
+
+	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-youtubereporting
+	compile group: 'com.google.apis', name: 'google-api-services-youtubereporting', version: 'v1-rev1-1.20.0'
+
+	// https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty
+	compile("com.google.oauth-client:google-oauth-client-jetty:1.25.0") {
+		exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+	}
+// https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2
+	compile group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.25.0'
+
+	// https://mvnrepository.com/artifact/com.google.collections/google-collections
+	compile group: 'com.google.collections', name: 'google-collections', version: '1.0'
+
+	implementation ("org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE")
+	implementation ("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE")
+	implementation ("org.webjars:js-cookie:2.1.0")
+	implementation ("org.webjars:jquery:2.1.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation ("org.webjars:bootstrap:3.2.0")
+	implementation ("org.webjars:webjars-locator-core:0.35")
+	implementation ("org.springframework.boot:spring-boot-configuration-processor:2.0.1.RELEASE")
+
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootJar {
+	mainClassName = 'fr.dashboard.server.DashboardServer'
+}
+
+apply plugin: 'com.palantir.docker'
+
+task unpack(type: Copy) {
+	dependsOn bootJar
+	from(zipTree(tasks.bootJar.outputs.files.singleFile))
+	into("build/dependency")
+}
+
+docker {
+	name "${project.group}/${bootJar.baseName}"
+	copySpec.from(tasks.unpack.outputs).into("dependency")
+	buildArgs(['DEPENDENCY': "dependency"])
+}

@@ -1,0 +1,251 @@
+{
+  "customer": {
+    "host":
+  },
+  "server": {
+    "current_time": ,
+    "services": [
+      {
+        "name": "weather",
+        "widgets": [
+          {
+            "name": "city_temperature",
+            "description": "Display temperature for a city",
+            "params": [
+              {
+                "name": "city",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "city prevision",
+            "description": "Display temperature and weather for a city on 7 days",
+            "params": [
+              {
+                "name": "city",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Cinema",
+        "widgets": [
+          {
+            "name": "Movies",
+            "description": "Display the researched movie",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "Movies_display",
+            "description": "Display the movie in function of your country",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Steam",
+        "widgets": [
+          {
+            "name": "Connected players",
+            "description": "Display the number of connected players for the chosen game",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "news game ",
+            "description": "Display 2 last news of a game",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reddit",
+        "widgets": [
+          {
+            "name": "Subreddits",
+            "description": "Shows subreddits corresponding to the research",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "twitter",
+        "widgets": [
+          {
+            "name": "tweets",
+            "description": "Displays tweets corresponding to research",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "users",
+            "description": "Displays users corresponding to research",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "music",
+        "widgets": [
+          {
+            "name": "musics",
+            "description": "Displays musics corresponding to research",
+            "params": [
+              {
+                "name": "music name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Meme",
+        "widgets": [
+          {
+            "name": "Meme",
+            "description": "Shows meme corresponding to the research",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Giphy",
+        "widgets": [
+          {
+            "name": "Giphy",
+            "description": "Shows gifs corresponding to the research",
+            "params": [
+              {
+                "name": "name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "youtube",
+        "widgets": [
+          {
+            "name": "channels",
+            "description": "Displays channels",
+            "params": [
+              {
+                "name": "channel name",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "description": "Displays videos",
+            "params": [
+              {
+                "name": "video name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "github",
+        "widgets": [
+          {
+            "name": "repositories",
+            "description": "Displays reposotories",
+            "params": [
+              {
+                "name": "repository name",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "localise IP",
+        "widgets": [
+          {
+            "name": "localise IP",
+            "description": "Finds the given ip location",
+            "params": [
+              {
+                "name": "IP address",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Twitch",
+        "widgets": [
+          {
+            "name": "Twitch streamers",
+            "description": "Finds N persons in top streamers",
+            "params": [
+              {
+                "name": "Number",
+                "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "Twitch game",
+            "description": "Finds N game in top",
+            "params": [
+              {
+                "name": "Number",
+                "type": "string"
+              }
+            ]
+          }
+
+        ]
+      }
+    ]
+  }
+}

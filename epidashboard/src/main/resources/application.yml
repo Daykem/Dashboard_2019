@@ -1,0 +1,72 @@
+
+security:
+    oauth2:
+        client:
+            client-id: acme
+            client-secret: acmesecret
+            scope: read,write
+            auto-approve-scopes: '.*'
+
+facebook:
+    client:
+        clientId:
+        clientSecret:
+        accessTokenUri: https://graph.facebook.com/oauth/access_token
+        userAuthorizationUri: https://www.facebook.com/dialog/oauth
+        tokenName: oauth_token
+        authenticationScheme: query
+        clientAuthenticationScheme: form
+    resource:
+        userInfoUri: https://graph.facebook.com/me
+github:
+    client:
+        clientId:
+        clientSecret:
+        accessTokenUri: https://github.com/login/oauth/access_token
+        userAuthorizationUri: https://github.com/login/oauth/authorize
+        clientAuthenticationScheme: form
+    resource:
+        userInfoUri: https://api.github.com/user
+twitter:
+    client:
+        clientId:
+        clientSecret:
+        accessTokenUri: https://api.twitter.com/oauth/access_token
+        userAuthorizationUri: https://api.twitter.com/oauth/authorize
+        clientAuthenticationScheme: form
+    resource:
+        userInfoUri:  https://api.twitter.com/1.1/users/show.json
+logging:
+    level:
+        org.springframework.security: DEBUG
+linkedin:
+    client:
+        clientId:
+        clientSecret:
+        accessTokenUri: https://www.linkedin.com/oauth/v2/accessToken
+        userAuthorizationUri: https://www.linkedin.com/oauth/v2/authorization
+        clientAuthenticationScheme: form
+        scope: r_liteprofile, r_emailaddress, w_member_social
+    resource:
+        userInfoUri: https://api.linkedin.com/v1/people/~?format=json
+
+google:
+    client:
+        clientId:
+        clientSecret:
+        accessTokenUri: https://accounts.google.com/o/oauth2/token
+        userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+        clientAuthenticationScheme: form
+        scope: profile email
+    resource:
+        userInfoUri:  https://www.googleapis.com/oauth2/v3/userinfo
+reddit:
+    client:
+        clientId:
+        clientSecret: 
+        accessTokenUri: https://www.reddit.com/api/v1/access_token
+#        userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+
+spring:
+    main:
+        allow-bean-definition-overriding: true

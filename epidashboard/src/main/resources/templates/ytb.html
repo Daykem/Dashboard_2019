@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>Epiboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/black-dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/demo/demo.css}" rel="stylesheet"/>
+</head>
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+</style>
+
+<style>
+.dropbtn {
+background-color: #1e1e2d;
+color: white;
+padding: 10px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+background-color: #005c8e;
+}
+
+#myInput {
+box-sizing: border-box;
+background-position: 14px 12px;
+background-repeat: no-repeat;
+font-size: 16px;
+padding: 14px 20px 12px 45px;
+border: none;
+border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {
+outline: 3px solid #ddd;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+</style>
+
+<style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #e9e9e9;
+    font-family: 'Arimo', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #010b26;
+}
+
+* {
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: #6ABCEA;
+}
+
+.info-section label {
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: .5em;
+    font-size: 9px;
+}
+
+.info-section span {
+    font-weight: 700;
+    font-size: 11px;
+}
+
+@media screen and (max-width: 500px) {
+    .movie-card {
+        width: 95%;
+        max-width: 95%;
+        margin: 1em;
+        display: block;
+    }
+}
+</style>
+
+<body class="">
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a th:href="@{/dashboard}">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/userr}">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li id="dcine">
+                    <a th:href="@{/cine}">
+                        <i class="tim-icons icon-video-66"></i>
+                        <p>Cinéma</p>
+                    </a>
+                </li>
+                <li id="dmap">
+                    <a th:href="@{/map}">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li id="dsteam">
+                    <a th:href="@{/notif}">
+                        <i class="tim-icons icon-world"></i>
+                        <p>Steam</p>
+                    </a>
+                </li>
+                <li id="dytb" class="active ">
+                    <a th:href="@{/ytb}">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                        <p>Youtube</p>
+                    </a>
+                </li>
+                <li id="dred">
+                    <a th:href="@{/reddit}">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Reddit</p>
+                    </a>
+                </li>
+                <li id="dmeme">
+                    <a th:href="@{/rand}">
+                        <i class="tim-icons icon-satisfied"></i>
+                        <p>Meme</p>
+                    </a>
+                </li>
+                <li id="dlip">
+                    <a th:href="@{/whereip}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Localise IP</p>
+                    </a>
+                </li>
+                <li id="ddeez">
+                    <a th:href="@{/music}">
+                        <i class="tim-icons icon-square-pin"></i>
+                        <p>Music</p>
+                    </a>
+                </li>
+                <li id="dtwit">
+                    <a th:href="@{/tw}">
+                        <i class="tim-icons icon-chat-33"></i>
+                        <p>Twitter</p>
+                    </a>
+                </li>
+                <li id="dgith">
+                    <a th:href="@{/gith}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Github</p>
+                    </a>
+                </li>
+                <li id="dtwitch">
+                    <a th:href="@{/twitch}">
+                        <i class="tim-icons icon-vector"></i>
+                        <p>Twitch</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle d-inline">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:void(0)">Youtube</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="search-bar input-group">
+                            <button class="btn btn-link" id="search-button" data-toggle="modal"
+                                    data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
+                                <span class="d-lg-none d-md-block">Search</span>
+                            </button>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <div class="photo">
+                                    <img th:src="@{/assets/img/anime3.png}" alt="Profile Photo">
+                                </div>
+                                <b class="caret d-none d-lg-block d-xl-block"></b>
+                                <p class="d-lg-none">
+                                    Log out
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li class="nav-link"><a th:href="@{/userr}" class="nav-item dropdown-item">Profile</a>
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li class="nav-link"><a th:href="@{/}" class="nav-item dropdown-item">Log out</a></li>
+                            </ul>
+                        </li>
+                        <li class="separator d-lg-none"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content" id="dweather">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <div class="col-lg-3">
+                                <select style="padding: 10px" class="dropbtn" id="researchstat">
+                                    <option value="chaine">Chaines</option>
+                                    <option value="video">Vidéos</option>
+                                </select>
+                            </div>
+                            <h3 class="card-title" style="margin-left: 30px">Youtube</h3>
+                            <a style="padding: 102px; font-size: 26px; width: 49px; text-align: center; text-decoration: none;" href="/login/google" class="fa fa-google"></a>
+
+                            <li style="margin-left: -10px; margin-top: -52px;" class="search-bar input-group">
+                                <button class="btn btn-link" id="meteo-recherche" data-toggle="modal"
+                                        data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
+                                </button>
+                            </li>
+                            <h3 style="margin-left: 30px;" class="card-title" id="1output"></h3>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output1.1"></h3>
+                                                    <img id="1output1" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output2.1"></h3>
+                                                    <img id="1output2" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output3.1"></h3>
+                                                    <img id="1output3" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output4.1"></h3>
+                                                    <img id="1output4" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output5.1"></h3>
+                                                    <img id="1output5" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output6.1"></h3>
+                                                    <img id="1output6" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output7.1"></h3>
+                                                    <img id="1output7" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output8.1"></h3>
+                                                    <img id="1output8" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output9.1"></h3>
+                                                    <img id="1output9" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 1%; margin-top: 10px">
+                            <div style="margin-left: 1%; margin-top: 10px">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="card card-chart">
+                                                <div class="card-header">
+                                                    <h3 style="margin-left: 30px;" class="card-title"
+                                                        id="1output0.1"></h3>
+                                                    <img id="1output0" width="200" height="150">
+                                                </div>
+                                            </div>
+                                        </div><!--movie-content-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--movie-content-->
+            </div>
+        </div>
+
+        <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input onclick="changement()" type="text" class="form-control" id="inlineFormInputGroup"
+                               placeholder="Recherche" value="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link">
+                            Epiboard
+                        </a>
+                    </li>
+                </ul>
+                <div class="copyright">
+                    ©
+                    <a href="https://tomrouvier.eu" target="_blank">Epiboard</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap-notify.js}"></script>
+<script th:src="@{/assets/js/black-dashboard.min.js}"></script>
+<script th:src="@{/assets/demo/demo.js}"></script>
+<script>
+    var input = document.getElementById("inlineFormInputGroup");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("inlineFormInputGroup").click();
+        }
+    });
+
+    $(document).ready(function () {
+        setInterval(function () {
+            cache_clear()
+        }, 30000);
+    });
+
+    function cache_clear() {
+
+    }
+
+    function changement() {
+        var res = document.getElementById("inlineFormInputGroup").value;
+        var researchstat = document.getElementById("researchstat").value;
+        document.getElementById("1output").innerHTML = res;
+        if (researchstat === "video") {
+            if (res !== null && res !== "") {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/youtubeVideoSearch",
+                    data: {rechearch: res},
+                    success: function (data) {
+                        console.log(data);
+                        var i = 0;
+                        while (i < 10) {
+                            var x = "1output" + i;
+                            var y = "1output" + i + ".1";
+                            document.getElementById(y).innerHTML = data[i][1];
+                            document.getElementById(x).src = data[i][5];
+                            i++;
+                        }
+                    },
+                    error: function (status) {
+                        console.log(status);
+                    }
+                });
+            }
+        } else {
+            if (res !== null && res !== "") {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/youtubeChannelSearch",
+                    data: {rechearch: res},
+                    success: function (data) {
+                        console.log(data);
+                        var i = 0;
+                        while (i < 10) {
+                            var x = "1output" + i;
+                            var y = "1output" + i + ".1";
+                            document.getElementById(x).src = data[i][4];
+                            document.getElementById(y).innerHTML = data[i][1];
+                            i++;
+                        }
+                    },
+                    error: function (status) {
+                        console.log(status);
+                    }
+                });
+            }
+        }
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/userparse",
+        success: function (data) {
+            if (data[1] === "false") {
+                document.getElementById('dcine').style.display = "none";
+            }
+            if (data[2] === "false") {
+                document.getElementById('dytb').style.display = "none";
+            }
+            if (data[3] === "false") {
+                document.getElementById('dmap').style.display = "none";
+            }
+            if (data[4] === "false") {
+                document.getElementById('dred').style.display = "none";
+            }
+            if (data[5] === "false") {
+                document.getElementById('dsteam').style.display = "none";
+            }
+            if (data[6] === "false") {
+                document.getElementById('dmeme').style.display = "none";
+            }
+            if (data[7] === "false") {
+                document.getElementById('dlip').style.display = "none";
+            }
+            if (data[8] === "false") {
+                document.getElementById('ddeez').style.display = "none";
+            }
+            if (data[9] === "false") {
+                document.getElementById('dtwit').style.display = "none";
+            }
+            if (data[10] === "false") {
+                document.getElementById('dgith').style.display = "none";
+            }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+
+    $(document).ready(function () {
+        $().ready(function () {
+            $sidebar = $('.sidebar');
+            $navbar = $('.navbar');
+            $main_panel = $('.main-panel');
+
+            $full_page = $('.full-page');
+
+            $sidebar_responsive = $('body > .navbar-collapse');
+            sidebar_mini_active = true;
+            white_color = false;
+
+            window_width = $(window).width();
+
+            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+            $('.fixed-plugin a').click(function (event) {
+                if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                }
+            });
+
+            $('.fixed-plugin .background-color span').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+
+                var new_color = $(this).data('color');
+
+                if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                }
+
+                if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                }
+
+                if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                }
+            });
+
+            $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                }
+
+                // we simulate the window Resize so the charts will get updated in realtime.
+                var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 180);
+
+                // we stop the simulation of Window Resize after the animations are completed
+                setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                }, 1000);
+            });
+
+            $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').addClass('white-content');
+                    }, 900);
+
+                    white_color = true;
+                }
+
+
+            });
+
+            $('.light-badge').click(function () {
+                $('body').addClass('white-content');
+            });
+
+            $('.dark-badge').click(function () {
+                $('body').removeClass('white-content');
+            });
+        });
+    });
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS &&
+    TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+    });
+</script>
+</body>
+
+</html>

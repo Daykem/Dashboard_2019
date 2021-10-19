@@ -1,0 +1,26 @@
+version: '3'
+services:
+    server:
+        build: epidashboard
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
+        environment:
+            - MYSQL_HOST=db
+            - MYSQL_PORT=3306
+    db:
+        image: mariadb
+        restart: always
+        container_name: db
+        environment:
+            - MYSQL_DATABASE=dashboard
+            - MYSQL_ROOT_PASSWORD=Carrera4
+        ports:
+            - "3307:3306"
+        volumes:
+            - ./mysql-dump:/docker-entrypoint-initdb.d
+            - mysql-db:/var/lib/mysql
+
+volumes:
+    mysql-db:
